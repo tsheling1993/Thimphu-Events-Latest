@@ -173,6 +173,7 @@ export class AdminPage implements OnInit {
   }
   thromde(){
     this.showmovies = false;
+    this.navCtl.navigateForward('/thromdedriver');
   }
   others(){
     this.showmovies = false;

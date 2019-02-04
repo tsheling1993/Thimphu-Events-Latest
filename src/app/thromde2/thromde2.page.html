@@ -45,7 +45,10 @@
             <!-- for city bus schedule -->
             <div *ngIf="showCitybusSchedule_var">
                 <ion-row padding>
-                    <ion-col size="10">
+                    <ion-col size="3">
+                        <br><b>Day:</b> 
+                    </ion-col>
+                    <ion-col size="9">
                       <ion-select class="input_border" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Day" [(ngModel)]="daySelectedCity" (ionChange)="changedDaySelectedCity()">
                         <ion-select-option value="dayCityMonSat" >Monday to Saturday</ion-select-option>
                         <ion-select-option value="dayCitySun" >Sunday</ion-select-option>

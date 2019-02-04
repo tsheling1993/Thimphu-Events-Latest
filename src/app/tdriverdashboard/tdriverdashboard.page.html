@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+      <ion-buttons>
+          <ion-button (click)="openMenu()" style="color:white;"><ion-icon name="menu"></ion-icon></ion-button>
+        <ion-back-button style="color:rgb(255, 255, 255);"></ion-back-button>
+        <ion-title style="color:white;"><b>Driver Dashboard</b></ion-title>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <br>
+  <ion-grid>
+    <div style="text-align: center;color:teal"><b>SET DETAILS</b></div>
+    <ion-row>
+      <ion-col size="3"><br><b>From:</b></ion-col>
+      <ion-col size="7">
+          <ion-select class="input_border" interface="popover" placeholder="Select Source" [(ngModel)]="sourceTruck">
+            <ion-select-option value="town">Town</ion-select-option>       
+            <ion-select-option value="changjiji">Changjiji</ion-select-option>       
+            <ion-select-option value="changzamtog">Changzamtog</ion-select-option>       
+            <ion-select-option value="babesa">Babesa</ion-select-option>       
+            <ion-select-option value="olakha">Olakha</ion-select-option>       
+            <ion-select-option value="motithang">Motithang</ion-select-option>      
+          </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3"><br><b>To:</b></ion-col>
+      <ion-col size="7">
+        <ion-select class="input_border" interface="popover" placeholder="Select Destination" [(ngModel)]="destinationTruck">
+          <ion-select-option value="town">Town</ion-select-option>       
+          <ion-select-option value="changjiji">Changjiji</ion-select-option>       
+          <ion-select-option value="changzamtog">Changzamtog</ion-select-option>       
+          <ion-select-option value="babesa">Babesa</ion-select-option>       
+          <ion-select-option value="olakha">Olakha</ion-select-option>       
+          <ion-select-option value="motithang">Motithang</ion-select-option>      
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3"><br><b>Type:</b></ion-col>
+      <ion-col size="6">
+        <ion-select class="input_border" interface="popover" placeholder="Select Type" [(ngModel)]="wasteType">
+          <ion-select-option value="wet">Wet</ion-select-option>       
+          <ion-select-option value="dry">Dry</ion-select-option>       
+          <ion-select-option value="both">Both</ion-select-option>             
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6"><b>Descriptions:</b> </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10"> 
+        <ion-input class="input_border" placeholder="Write other details (Optional)" [(ngModel)]="detailTruck"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row padding>
+      <ion-col size="5"> 
+        <ion-button color="tertiary" expand="full">Start</ion-button>
+      </ion-col>
+      <ion-col size="5"> 
+        <ion-button color="tertiary" expand="full">Stop</ion-button>        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

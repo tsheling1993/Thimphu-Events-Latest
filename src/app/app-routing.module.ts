@@ -52,6 +52,8 @@ const routes: Routes = [
   { path: 'religionupdate/:title', loadChildren: './religionupdate/religionupdate.module#ReligionupdatePageModule' },
   { path: 'festivaladdmore', loadChildren: './festivaladdmore/festivaladdmore.module#FestivaladdmorePageModule' },
   { path: 'festivalupdate/:title', loadChildren: './festivalupdate/festivalupdate.module#FestivalupdatePageModule' },
+  { path: 'thromdedriver', loadChildren: './thromdedriver/thromdedriver.module#ThromdedriverPageModule' },
+  { path: 'tdriverdashboard', loadChildren: './tdriverdashboard/tdriverdashboard.module#TdriverdashboardPageModule' },
 ];
 
 @NgModule({

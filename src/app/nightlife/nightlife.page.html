@@ -17,11 +17,11 @@
     <ion-card *ngFor='let data of rData'>
       <ion-card-content style="font-family: 'Times New Roman', Times, serif;">
         <div style="color:dodgerblue; text-align: right"><ion-icon name="calendar"></ion-icon>{{data.date.toDate() | date:"mediumDate"}}</div>
-        <div style="color:dodgerblue;font-family: 'Times New Roman', Times, serif;"><b>Title:&nbsp;</b>{{data.title}}</div>
+        <div style="color:teal;font-family: 'Times New Roman', Times, serif;"><b>Title:&nbsp;</b>{{data.title}}</div>
         <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon name="time"></ion-icon><b>Time:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.time}}</span><br>
         <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon name="pin"></ion-icon><b>Venue:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.venue}}</span><br>
-        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon name="pricetags"></ion-icon><b>Price:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.price}}</span><br>
-        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon name="more"></ion-icon><b>Details:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.detail}}</span><br>
+        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon name="pricetags"></ion-icon><b>Price:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">Nu. {{data.price}}/-</span><br>
+        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon name="list"></ion-icon><b>Details:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.detail}}</span><br>
       </ion-card-content>
     </ion-card>  
 </ion-content>
