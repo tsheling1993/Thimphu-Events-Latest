@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'footballAdmin', loadChildren: './football-admin/football-admin.module#FootballAdminPageModule' },
   { path: 'footbalFullAdmin', loadChildren: './footbal-full-admin/footbal-full-admin.module#FootbalFullAdminPageModule' },
   { path: 'contact', loadChildren: './contact/contact.module#ContactPageModule' },
-  { path: 'trackgarbagetruck/:latitude/:longitude', loadChildren: './trackgarbagetruck/trackgarbagetruck.module#TrackgarbagetruckPageModule' },
+  { path: 'trackgarbagetruck', loadChildren: './trackgarbagetruck/trackgarbagetruck.module#TrackgarbagetruckPageModule' },
   { path: 'trackcitybus/:latitude/:longitude', loadChildren: './trackcitybus/trackcitybus.module#TrackcitybusPageModule' },
   { path: 'movieadmin', loadChildren: './movieadmin/movieadmin.module#MovieadminPageModule' },
   { path: 'salesadmin', loadChildren: './salesadmin/salesadmin.module#SalesadminPageModule' },
@@ -53,7 +53,7 @@ const routes: Routes = [
   { path: 'festivaladdmore', loadChildren: './festivaladdmore/festivaladdmore.module#FestivaladdmorePageModule' },
   { path: 'festivalupdate/:title', loadChildren: './festivalupdate/festivalupdate.module#FestivalupdatePageModule' },
   { path: 'thromdedriver', loadChildren: './thromdedriver/thromdedriver.module#ThromdedriverPageModule' },
-  { path: 'tdriverdashboard', loadChildren: './tdriverdashboard/tdriverdashboard.module#TdriverdashboardPageModule' },
+  { path: 'tdriverdashboard/:vehno', loadChildren: './tdriverdashboard/tdriverdashboard.module#TdriverdashboardPageModule',runGuardsAndResolvers:'always' },
 ];
 
 @NgModule({

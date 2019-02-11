@@ -73,6 +73,6 @@ export class AppComponent {
   }
   goHome(){
     this.menu.toggle('myMenu');
-   this.navCtrl.navigateForward('/home');
+   this.navCtrl.navigateRoot('/home');
   }
 }

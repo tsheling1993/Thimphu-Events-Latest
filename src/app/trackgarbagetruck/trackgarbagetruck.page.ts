@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as leaflet from 'leaflet';
-import { Map,Marker } from 'leaflet';
-import { AlertController,MenuController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { AlertController,MenuController, NavController } from '@ionic/angular';
+import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { GoogleMaps, GoogleMap, Environment, Marker, GoogleMapOptions } from '@ionic-native/google-maps/ngx';
 
 @Component({
   selector: 'app-trackgarbagetruck',
@@ -10,42 +10,28 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./trackgarbagetruck.page.scss'],
 })
 export class TrackgarbagetruckPage implements OnInit {
-  mapg: Map;
-  latitude:any;
-  longitude:any;
+
+  map: GoogleMap;
+
   constructor(private route: ActivatedRoute,
     private alertCtrl:AlertController,
-    private menu:MenuController) {
-    this.latitude=this.route.snapshot.params['latitude'];
-    this.longitude=this.route.snapshot.params['longitude'];
-
-   }
+    private menu:MenuController,
+    public fs: AngularFirestore,
+    private navCtl : NavController,
+    ) 
+    {
+      this.loadGarbageTruck();
+      setTimeout(() => {     
+        this.loadMap();         
+    }, 2000);
+    }
 
   ngOnInit() {
-    this.loadMap();
   }
   openMenu(){
     this.menu.toggle('myMenu');
   }
-  loadMap()
-  {
-    this.mapg=leaflet.map("mapg").setZoom(17,{animate:true,duration:0.5});//.panTo([this.latitude,this.longitude]);
-    leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.mapg);
-    this.mapg.locate({
-      setView: true,
-      maxZoom: 20,
-    }).on('locationfound', e => {
-      let marker=leaflet.marker([this.latitude,this.longitude]).on('click',()=>
-      {
-          this.alert("Info","Your Location");
-      });;
-      let markerGroup=leaflet.featureGroup();
-      markerGroup.addLayer(marker);
-      this.mapg.addLayer(markerGroup);
-      }).on('locationerror', (err) => {
-        alert(err);
-    })
-  }
+
   async alert(header:any,message:any)
   {
     const alert= await this.alertCtrl.create(
@@ -56,5 +42,68 @@ export class TrackgarbagetruckPage implements OnInit {
       }
     );
     alert.present();
+  }
+
+  lat: number;
+  longitude: number;
+  routeTo: any;
+  routeFrom: any;
+  vehNo: any;
+
+  garbageTruckData:any[]=[];
+ 
+  loadGarbageTruck(){
+    this.fs.collection('/t_garbage_trucks').doc('BG-1-A1000').get().subscribe(res=>  
+      {
+        this.garbageTruckData.push({
+          lat:res.data().latitude,
+          longitude:res.data().longitude,
+          routeTo : res.data().to,
+          routeFrom : res.data().from,
+          vehNo : res.data().vehicleno,
+        })
+        this.lat = res.data().latitude;
+        this.longitude = res.data().longitude,
+        this.routeTo = res.data().to,
+        this.routeFrom = res.data().from,
+        this.vehNo = res.data().vehicleno
+      })
+      console.log(this.garbageTruckData);
+  }
+
+  loadMap(){    
+    Environment.setEnv({
+      'API_KEY_FOR_BROWSER_RELEASE':'AIzaSyCSBKG782bLxr6qGnsoRCmu4kbKF3iahCs',
+      'API_KEY_FOR_BROWSER_DEBUG':'AIzaSyCSBKG782bLxr6qGnsoRCmu4kbKF3iahCs'
+    });
+    
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+         target: {
+           lat: this.lat,
+           lng: this.longitude
+         },
+         zoom: 15,
+         tilt: 30
+       }
+    };
+
+    this.map = GoogleMaps.create('map_canvas', mapOptions);
+    
+    let marker: Marker = this.map.addMarkerSync({
+      title: this.routeFrom+" - "+this.routeTo,
+      icon: 'blue',
+      //animation: 'DROP',
+      position: {
+        lat: this.lat,
+        lng: this.longitude
+      }
+    });
+    marker.showInfoWindow();
+  }
+
+  refreshMap(){
+    console.log("refresh map");
+   this.navCtl.navigateForward('/trackgarbagetruck');
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AlertController, NavController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-thromde2',
@@ -43,6 +44,7 @@ export class Thromde2Page implements OnInit {
 
   constructor(
     private fs: AngularFirestore,
+    private navCtl : NavController,
   ) 
   { 
     this.loadCitybusSchedule();
@@ -281,5 +283,9 @@ export class Thromde2Page implements OnInit {
         this.sun_chuba_chamgang = res.data().sun_chuba_chamgang
       })
       console.log(this.citybusScheduleData);
+    }
+
+  goGarbageTruck(){
+    this.navCtl.navigateForward('/trackgarbagetruck');
   }
 }

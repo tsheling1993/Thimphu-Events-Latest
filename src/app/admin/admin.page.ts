@@ -5,6 +5,7 @@ import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
 import * as _ from 'lodash';
+// import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-admin',
@@ -34,6 +35,7 @@ export class AdminPage implements OnInit {
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
     private menu: MenuController,
+    // public natStor: NativeStorage
   )
   {
     //for retriving the data
@@ -173,10 +175,25 @@ export class AdminPage implements OnInit {
   }
   thromde(){
     this.showmovies = false;
+    // this.natStor.getItem('drivertok').then(
+    //   data=>
+    //   {
+    //     if(data)
+    //     {
+    //       this.navCtl.navigateForward('tdriverdashboard/'+data.vehno);
+    //     }
+    //     else{
+    // this.navCtl.navigateForward('/thromdedriver');
+          
+    //     }
     this.navCtl.navigateForward('/thromdedriver');
+
+      // }
+    // )
   }
   others(){
     this.showmovies = false;
+   
     this.navCtl.navigateForward('/otheradmin');
   }
 

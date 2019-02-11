@@ -17,6 +17,10 @@ import { UploadpicService } from '../services/uploadpic/uploadpic.service';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { ImageResizer } from '@ionic-native/image-resizer/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
+
 const config={
   apiKey: "AIzaSyA4Lp4OYSekcXStv6OYK3_Usua82Pojr_8",
     authDomain: "thimphu-events.firebaseapp.com",
@@ -41,7 +45,10 @@ const config={
     Geolocation,
     ImageResizer,
     PhotoViewer,
+    Device,
     CallNumber,
+    NativeStorage,
+    GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

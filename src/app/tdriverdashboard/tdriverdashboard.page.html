@@ -4,6 +4,7 @@
           <ion-button (click)="openMenu()" style="color:white;"><ion-icon name="menu"></ion-icon></ion-button>
         <ion-back-button style="color:rgb(255, 255, 255);"></ion-back-button>
         <ion-title style="color:white;"><b>Driver Dashboard</b></ion-title>
+        <ion-button style="--background:transparent;" (click)="openOptions()" slot="right"><ion-icon name="options"></ion-icon></ion-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -11,11 +12,17 @@
 <ion-content padding>
   <br>
   <ion-grid>
+    <ion-row>
+      <ion-col size="4"><ion-label><b>Vehicle No:</b></ion-label></ion-col>
+      <ion-col size="6"><ion-label>{{vehicleno}}</ion-label></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
     <div style="text-align: center;color:teal"><b>SET DETAILS</b></div>
     <ion-row>
       <ion-col size="3"><br><b>From:</b></ion-col>
       <ion-col size="7">
-          <ion-select class="input_border" interface="popover" placeholder="Select Source" [(ngModel)]="sourceTruck">
+          <ion-select class="input_border" interface="popover" placeholder="Select Location" [(ngModel)]="routeFrom">
             <ion-select-option value="town">Town</ion-select-option>       
             <ion-select-option value="changjiji">Changjiji</ion-select-option>       
             <ion-select-option value="changzamtog">Changzamtog</ion-select-option>       
@@ -28,7 +35,7 @@
     <ion-row>
       <ion-col size="3"><br><b>To:</b></ion-col>
       <ion-col size="7">
-        <ion-select class="input_border" interface="popover" placeholder="Select Destination" [(ngModel)]="destinationTruck">
+        <ion-select class="input_border" interface="popover" placeholder="Select Destination" [(ngModel)]="routeTo">
           <ion-select-option value="town">Town</ion-select-option>       
           <ion-select-option value="changjiji">Changjiji</ion-select-option>       
           <ion-select-option value="changzamtog">Changzamtog</ion-select-option>       
@@ -53,15 +60,15 @@
     </ion-row>
     <ion-row>
       <ion-col size="10"> 
-        <ion-input class="input_border" placeholder="Write other details (Optional)" [(ngModel)]="detailTruck"></ion-input>
+        <ion-input class="input_border" placeholder="Write other details (Optional)" [(ngModel)]="details"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row padding>
       <ion-col size="5"> 
-        <ion-button color="tertiary" expand="full">Start</ion-button>
+        <ion-button color="tertiary" (click)="start()" expand="full">Start</ion-button>
       </ion-col>
       <ion-col size="5"> 
-        <ion-button color="tertiary" expand="full">Stop</ion-button>        
+        <ion-button color="tertiary" [disabled]="stopButton" (click)="stop()" expand="full">Stop</ion-button>        
       </ion-col>
     </ion-row>
   </ion-grid>
