@@ -30,7 +30,8 @@ export class EntertainmentaddmorePage implements OnInit {
 
   //this is the function for uploading data for Entertainment
   insertFs(){
-    this.fs.collection('/t_entertainment').add(
+    // this.fs.collection('/t_entertainment').add(
+    this.fs.collection('/t_entertainment').doc(`${this.rTitle}`).set(
       {
         tilte : this.rTitle,
         venue : this.rVenue,
@@ -42,7 +43,7 @@ export class EntertainmentaddmorePage implements OnInit {
     ).then(data=>
       {
         console.log("reach here with entertainment data: "+data);
-        this.alert("For Information","Insertion of the entertainment data was successful. press ok to exit...")
+        this.alert("For Information","Data Insertion Successful. press ok to exit...")
         this.navCtl.navigateForward('/musicordance');
       })
   }
@@ -78,10 +79,14 @@ export class EntertainmentaddmorePage implements OnInit {
       //androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
       androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
-      date => 
+      date =>{
+        let dateArray=date.toString().split(' ');
+        this.rDate=dateArray[0]+" "+dateArray[1]+" "+dateArray[2]+" "+dateArray[3]
+        err => console.log('Error occurred while getting date: ', err)
+      }
+    
       //console.log('Got date: ', date),
-      this.rDate = date,
-      err => console.log('Error occurred while getting date: ', err)
+      
     );
   }
 

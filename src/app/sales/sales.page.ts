@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import { AlertController, NavController, List, MenuController } from '@ionic/angular';
+import { AlertController, NavController, List, MenuController, LoadingController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
@@ -21,8 +21,9 @@ export class SalesPage implements OnInit {
   salesList: Array<any[]>;
   title:any;
   desc:any;
+  timeoutStatus: any;
   slideOpts = {
-    effect: 'flip'
+    effect: 'fade',
   };
   constructor
   (
@@ -31,9 +32,11 @@ export class SalesPage implements OnInit {
     private navCtrl: NavController,
     private iab: InAppBrowser,
     private menu: MenuController,
-    private photoViewer: PhotoViewer
+    private photoViewer: PhotoViewer,
+    public loadingController: LoadingController
   )
   { 
+    this.presentLoading();
     this.fs.collection('/sales',ref=>ref.orderBy('createdAt','desc')).get().subscribe(res=>
     {
       res.forEach((doc:any)=>
@@ -44,7 +47,12 @@ export class SalesPage implements OnInit {
         detail : doc.data().detail,
         url: doc.data().url
       })
+      this.salesTitle = doc.data().salestitle;
       // this.movieList.push(this.movie);
+      if(this.sales){
+        console.log("up");
+        this.loadingController.dismiss();      
+      }
     });
     })
     console.log(this.sales);
@@ -68,6 +76,18 @@ export class SalesPage implements OnInit {
       });
       })
       console.log(this.items);
+      this.timeoutStatus = setTimeout(() => {
+        console.log("value="+this.salesTitle);      
+        if(this.salesTitle == undefined){
+          console.log("No Internet Connection");
+          this.loadingController.dismiss();      
+          this.navCtrl.navigateForward('/internetstatus');
+        }      
+    }, 7500);
+  }
+  ionViewWillLeave(){
+    console.log("Leave view");
+    clearTimeout(this.timeoutStatus);
   }
   
   ngOnInit() {
@@ -86,6 +106,16 @@ export class SalesPage implements OnInit {
 
   viewImg3(url3 : any){
     this.photoViewer.show(url3, '', {share: true});
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
   }
 }
 

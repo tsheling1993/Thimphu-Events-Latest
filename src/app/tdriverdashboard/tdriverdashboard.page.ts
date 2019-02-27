@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController, NavController, Platform } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ActivatedRoute,NavigationEnd,Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Subscription } from 'rxjs';
-
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Component({
   selector: 'app-tdriverdashboard',
@@ -34,7 +35,12 @@ export class TdriverdashboardPage implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     public alertCtrl: AlertController,
-    public geolocation: Geolocation
+    public geolocation: Geolocation,
+    private menu: MenuController,
+    public natStor: NativeStorage,
+    private navCtl : NavController,
+    public backgroundMode: BackgroundMode,
+    private platform: Platform,
   ) { 
     this.vehicleno=this.route.snapshot.params['vehno'];
     this.router.events.subscribe((e:any)=>
@@ -44,11 +50,17 @@ export class TdriverdashboardPage implements OnInit {
       this.loadData();
     }
   })
+
+  this.platform.ready().then(() => {
+    this.backgroundMode.enable();    
+  });
   }
 
   ngOnInit() {
     this.loadData();
-    
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
   }
 
   loadData()
@@ -113,6 +125,12 @@ export class TdriverdashboardPage implements OnInit {
     }
     else if(this.details=="")
     {
+      this.stopButton = false;
+
+      this.backgroundMode.enable();
+      this.backgroundMode.setDefaults({ 
+        text:'Your Location Details are tracked'
+      });
       this.afs.collection('t_garbage_trucks').doc(`${this.vehicleno}`).update(
         {
           from:this.routeFrom,
@@ -123,7 +141,7 @@ export class TdriverdashboardPage implements OnInit {
         }
       ).then(()=>
     {
-      this.alertGeneral("Journey Started","Details of this truck's journey are now online");
+      this.alertGeneral("Journey Started","Details of this truck's journey are now Online");
     }).catch(()=>
       {
         this.alertGeneral("Error","No Internet Connection")
@@ -142,7 +160,11 @@ export class TdriverdashboardPage implements OnInit {
     else{
 
       this.stopButton = false;
-
+      
+      this.backgroundMode.enable();
+      this.backgroundMode.setDefaults({ 
+        text:'Your Location Details are tracked'
+      });
       this.afs.collection('t_garbage_trucks').doc(`${this.vehicleno}`).update(
         {
           from:this.routeFrom,
@@ -168,9 +190,6 @@ export class TdriverdashboardPage implements OnInit {
           )
         });  
     }
-  
-    
-    
   }
 
   stop()
@@ -191,6 +210,8 @@ export class TdriverdashboardPage implements OnInit {
     alert.present();
   }
 
-
-
+  logout(){
+    this.natStor.remove('drivertok');
+    this.navCtl.navigateForward('/thromdedriver');    
+  }
 }

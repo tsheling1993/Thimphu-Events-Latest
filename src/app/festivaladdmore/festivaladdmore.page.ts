@@ -29,7 +29,8 @@ export class FestivaladdmorePage implements OnInit {
 
   //for uploading the the data
   insertFs(){
-    this.fs.collection('/t_festival').add(
+    // this.fs.collection('/t_festival').add(
+    this.fs.collection('/t_festival').doc(`${this.rTitle}`).set(
       {
       title : this.rTitle,
       date : this.rDate,
@@ -40,7 +41,7 @@ export class FestivaladdmorePage implements OnInit {
     ).then(data=>
       {
         console.log("reach here with data: "+data);
-          this.alert("For Information","Insertion successful");
+          this.alert("For Information","Data Insertion successful");
           this.navCtl.navigateForward('/nationalfest');
       }
       )
@@ -60,12 +61,17 @@ export class FestivaladdmorePage implements OnInit {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
-      date => 
+      date =>{
+        let dateArray=date.toString().split(' ');
+        this.rDate=dateArray[0]+" "+dateArray[1]+" "+dateArray[2]+" "+dateArray[3]
+        err => console.log('Error occurred while getting date: ', err)
+      }
+    
       //console.log('Got date: ', date),
-      this.rDate = date,
-      err => console.log('Error occurred while getting date: ', err)
+      
     );
   }
 

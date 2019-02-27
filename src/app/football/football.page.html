@@ -19,19 +19,19 @@
           <ion-item class="contact-special" button="true" (click)="showChangFutsal()">
             <p>Changlimithang Futsal</p>
           </ion-item>
-          <ion-item class="contact-special" button="true">
+          <ion-item class="contact-special" button="true" (click)="showChangjijiFull()">
             <p>Changjiji Football</p>
           </ion-item>
-          <ion-item class="contact-special" button="true">
+          <ion-item class="contact-special" button="true" (click)="showChangjijiFutsal()">
             <p>Changjiji Futsal</p>
           </ion-item>
-          <ion-item class="contact-special" button="true">
+          <ion-item class="contact-special" button="true" (click)="showYDF()">
             <p>YDF Futsal</p>
           </ion-item>
-          <ion-item class="contact-special" button="true">
+          <ion-item class="contact-special" button="true" (click)="showBabesa()">
             <p>Babesa Futsal</p>
           </ion-item>
-          <ion-item class="contact-special" button="true">
+          <ion-item class="contact-special" button="true" (click)="showSerbithang()">
             <p>Serbithang Football</p>
           </ion-item>
         </ion-list>
@@ -66,10 +66,10 @@
         </ion-grid>
        </ion-list> -->
 
-       <ion-card *ngFor="let data of match">
-         <ion-card-content>
-           <div class="date">
-            <ion-badge color="success"  class="font-style"><b><ion-icon name="football"></ion-icon>{{data.matchtitle}}</b></ion-badge>
+       <!-- <ion-card *ngFor="let data of match">
+         <ion-card-content> -->
+           <!-- <div class="date">
+            <span class="font-style">{{data.matchtitle}}</span>
             <div style="color:dodgerblue; text-align: right"><ion-icon name="calendar"></ion-icon>{{data.matchdate}}, {{data.matchtime}}</div>
           </div>
           <div class="date"><span style="color:dodgerblue; text-align: right"><ion-icon name="pin"></ion-icon><b>Venue:&nbsp;</b></span>{{data.matchvenue}}</div>
@@ -85,9 +85,39 @@
                 <span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.matchteam2}}<ion-icon name="football"></ion-icon></span>
              </ion-col>
            </ion-row>
+         </ion-grid> -->
+
+         <ion-grid padding *ngFor="let data of match">
+           <ion-row>
+             <ion-col size="12" style="background-color: rgb(243, 233, 233)">
+              <div style="width: 100%; text-align: center;font-size: 12pt;color: rgb(146, 146, 140);font-family: 'Times New Roman', Times, serif;">{{data.matchdate}}</div>
+             </ion-col>
+           </ion-row>
+           <ion-row>
+            <ion-col size="12">
+             <div style="width: 100%; text-align: center;font-size: 12pt;color: rgb(49, 49, 47);font-family: 'Times New Roman', Times, serif;"><span style="background-color: rgb(243, 233, 233)">{{data.matchtime}}</span></div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="1"></ion-col>
+            <ion-col size="4" class="font-style">
+               <span style="color:rgb(48, 46, 46);font-family: 'Times New Roman', Times, serif; font-size: 12pt;">{{data.matchteam1}}</span>
+            </ion-col>
+            <ion-col size="2">
+               <ion-badge color="secondary"  class="font-style">{{data.matchsore}}</ion-badge>
+            </ion-col>
+            <ion-col size="5"  class="font-style">
+               <span style="color:rgb(48, 46, 46);font-family: 'Times New Roman', Times, serif;font-size: 12pt;">{{data.matchteam2}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+                <div style="width: 100%; text-align: center;font-size: 12pt;color: rgb(146, 146, 140);font-family: 'Times New Roman', Times, serif;">{{data.matchvenue}}<br>{{data.matchtitle}}</div>
+            </ion-col>
+          </ion-row>
          </ion-grid>
-        </ion-card-content>
-       </ion-card>
+        <!-- </ion-card-content>
+       </ion-card> -->
 
       </ion-content>
     </ion-tab>

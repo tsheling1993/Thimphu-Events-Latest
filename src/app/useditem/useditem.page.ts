@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
 import * as _ from 'lodash';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-useditem',
@@ -32,11 +33,21 @@ export class UseditemPage implements OnInit {
     private navCtl : NavController,
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
-    private menu: MenuController) { }
+    private fstorage:AngularFireStorage,
+    public loadingController: LoadingController,
+    private menu: MenuController) { 
+      this.loadData();
+    }
 
   ngOnInit() {
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
+  }
 
+  loadData(){
     //for retriving useditem data
+    this.presentLoading();
     this.fs.collection('/useditems',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
@@ -48,10 +59,14 @@ export class UseditemPage implements OnInit {
           itemcontact : doc.data().itemcontact,
           detail : doc.data().detail,
           itemstatus : doc.data().itemstatus,
-          url1: doc.data().url1,
-          url2: doc.data().url2,
-          url3: doc.data().url3,
+          name1: doc.data().name1,
+          name2: doc.data().name2,
+          name3: doc.data().name3,
         })
+        if(this.items){
+          console.log("up");
+          this.loadingController.dismiss();      
+        }
       });
       })
       console.log(this.items);
@@ -71,18 +86,59 @@ async alert(header:string,message:string)
   alert.present();
 }
 //for deleting the movie item
-goDelete(itemtitle:any){
-  let basePath:string="/";
+goDelete(itemtitle:any, name1:any, name2:any, name3:any){
+ this.presentAlertConfirm(itemtitle, name1, name2, name3);
+}
+
+deleteSure(itemtitle, name1, name2, name3){
+  let basePath:string="/useditems";
   this.fs.collection(`${basePath}`).doc(`${itemtitle}`).delete().then(data=>
     {
         this.alert("For Information","Deletion successful");
-        this.navCtl.navigateForward('/useditem');
+        this.navCtl.navigateForward('/sales');
     }
     )
+    this.fstorage.storage.ref(`${basePath}/${name1}`).delete();
+    this.fstorage.storage.ref(`${basePath}/${name2}`).delete();
+    this.fstorage.storage.ref(`${basePath}/${name3}`).delete();
 }
 //for updating the item
 goEdit(itemtitle : any){
   console.log(itemtitle);
   this.navCtl.navigateForward('/useditemupdate/'+itemtitle);
-}
+  }
+
+  async presentAlertConfirm(title, name1, name2, name3) {
+    const alert = await this.altCtl.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteSure(title, name1, name2, name3)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
+  }
 }

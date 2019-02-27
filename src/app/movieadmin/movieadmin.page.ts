@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
 import * as _ from 'lodash';
 import { ThrowStmt } from '@angular/compiler';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-movieadmin',
@@ -34,11 +35,13 @@ export class MovieadminPage implements OnInit {
   constructor(private fs : AngularFirestore,
     private altCtl : AlertController,
     private navCtl : NavController,
+    private fstorage:AngularFireStorage,
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
     private menu:MenuController,
+    public loadingController: LoadingController,
     private firebase: Firebase) { 
-
+      this.presentLoading();
       this.fs.collection('/movies',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
         {
           res.forEach((doc:any)=>
@@ -52,10 +55,14 @@ export class MovieadminPage implements OnInit {
             price : doc.data().price,
             contact : doc.data().contact,
             tailor : doc.data().tailor,
-            url: doc.data().url
+            name: doc.data().name
           })
           // this.movieList.push(this.movie);
           console.log("movie data: "+this.movie);
+          if(this.movie){
+            console.log("up");
+            this.loadingController.dismiss();      
+          }
         });
         })
        
@@ -67,37 +74,6 @@ export class MovieadminPage implements OnInit {
   openMenu(){
     this.menu.toggle('myMenu');
   }
-
-  // detectFiles(event:any){
-  //   this.selectedFiles = event.target.files;
-  // }
-
-  // insertFs(){
-  //   let basePath:string="/movies";
-  //   let file = this.selectedFiles.item(0)
-  //   this.currentUpload = new Upload(file);
-  //   this.fs.collection(`${basePath}`).doc(`${this.movieTitle}`).set(
-  //     {
-  //     movietitle : this.movieTitle,
-  //     venue : this.movieVenue,
-  //     time : this.movieTime,
-  //     startdate : this.startDate, 
-  //     enddate : this.endDate,
-  //     price : this.moviePrice,
-  //     contact : this.movieContact,
-  //     tailor : this.movieTailor
-  //   }
-  //   ).then(data=>
-  //     {
-  //       console.log("reach here with data: "+data);
-  //         this.alert("For Information","Insertion successful");
-  //         this.navCtl.navigateForward('/movies');
-  //       console.log(data);
-  //       this.uploadServ.pushUpload1(this.currentUpload,basePath,this.movieTitle);
-  //     }
-  //     )
-      
-  // }
 
   async alert(header:string,message:string)
   {
@@ -113,7 +89,8 @@ export class MovieadminPage implements OnInit {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
       date =>{
         let dateArray=date.toString().split(' ');
@@ -145,7 +122,11 @@ export class MovieadminPage implements OnInit {
     this.navCtl.navigateForward('/movieaddmore');
   }
   //for deleting the movie item
-  goDelete(movietitle:any){
+  goDelete(movietitle:any, name: any){
+    this.presentAlertConfirm(movietitle, name)
+  }
+
+  deleteSure(movietitle:any,name:any){
     let basePath:string="/movies";
     this.fs.collection(`${basePath}`).doc(`${movietitle}`).delete().then(data=>
       {
@@ -153,10 +134,46 @@ export class MovieadminPage implements OnInit {
           this.navCtl.navigateForward('/movies');
       }
       )
+     this.fstorage.storage.ref(`${basePath}/${name}`).delete();
   }
   //for updating the item
   goEdit(movietitle : any){
     console.log(movietitle);
     this.navCtl.navigateForward('/movieupdate/'+movietitle);
+  }
+
+  async presentAlertConfirm(movietitle:any, name: any) {
+    const alert = await this.altCtl.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteSure(movietitle, name)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
   }
 }

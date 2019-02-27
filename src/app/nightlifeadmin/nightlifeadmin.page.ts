@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController,LoadingController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
@@ -26,10 +26,18 @@ export class NightlifeadminPage implements OnInit {
     private navCtl : NavController,
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
-    private menu: MenuController) { }
+    public loadingController: LoadingController,
+    private menu: MenuController) { 
+      this.loadData();
+    }
 
   ngOnInit() {
-
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
+  }
+  loadData(){
+    this.presentLoading();
     this.fs.collection('/t_nightlife',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
@@ -42,11 +50,14 @@ export class NightlifeadminPage implements OnInit {
           price:doc.data().price,
           detail : doc.data().detail,
         })
+        if(this.rData){
+          console.log("up");
+          this.loadingController.dismiss();      
+        }
       });
       })
       console.log(this.rData);
   }
-
 goAddMore(){
   this.navCtl.navigateForward('/nightlifeaddmore');
 }
@@ -63,7 +74,11 @@ async alert(header:string,message:string)
 }
 //for deleting the movie item
 goDelete(title:any){
-  let basePath:string="/";
+  this.presentAlertConfirm(title);
+}
+
+deleteSure(title){
+  let basePath:string="/t_nightlife";
   this.fs.collection(`${basePath}`).doc(`${title}`).delete().then(data=>
     {
         this.alert("For Information","Deletion successful");
@@ -75,5 +90,39 @@ goDelete(title:any){
 goEdit(title : any){
   console.log(title);
   this.navCtl.navigateForward('/nightlifeupdate/'+title);
-}
+  }
+
+  async presentAlertConfirm(title) {
+    const alert = await this.altCtl.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteSure(title)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
+  }
 }

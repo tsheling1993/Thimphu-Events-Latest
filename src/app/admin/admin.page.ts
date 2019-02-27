@@ -4,8 +4,9 @@ import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
+import {Router,NavigationEnd} from '@angular/router';
 import * as _ from 'lodash';
-// import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-admin',
@@ -28,6 +29,8 @@ export class AdminPage implements OnInit {
   selectedFiles: FileList;
   currentUpload: Upload;
   showmovies : boolean = false;
+  thromLogStat:boolean=false;
+  vehNo:any;
   constructor(
     private fs : AngularFirestore,
     private altCtl : AlertController,
@@ -35,7 +38,8 @@ export class AdminPage implements OnInit {
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
     private menu: MenuController,
-    // public natStor: NativeStorage
+    public natStor: NativeStorage,
+    public router: Router
   )
   {
     //for retriving the data
@@ -50,6 +54,23 @@ export class AdminPage implements OnInit {
     //     });
     //   })
     //   console.log(this.movieData);
+    this.router.events.subscribe((e:any)=>
+  {
+    if(e instanceof NavigationEnd)
+    {
+      this.natStor.getItem('drivertok').then(
+        data=>
+        {
+          if(data)
+          {
+            this.thromLogStat=true;
+            this.vehNo=data.vehno;
+          }
+  
+        }
+      )
+    }
+  })
   }
 
   detectFiles(event:any){
@@ -175,26 +196,19 @@ export class AdminPage implements OnInit {
   }
   thromde(){
     this.showmovies = false;
-    // this.natStor.getItem('drivertok').then(
-    //   data=>
-    //   {
-    //     if(data)
-    //     {
-    //       this.navCtl.navigateForward('tdriverdashboard/'+data.vehno);
-    //     }
-    //     else{
-    // this.navCtl.navigateForward('/thromdedriver');
-          
-    //     }
-    this.navCtl.navigateForward('/thromdedriver');
-
-      // }
-    // )
+    
+    if(this.thromLogStat==true)
+    {
+      this.navCtl.navigateForward('tdriverdashboard/'+this.vehNo);
+    }
+    else{
+     this.navCtl.navigateForward('/thromdedriver');  
+    }  
   }
   others(){
     this.showmovies = false;
    
-    this.navCtl.navigateForward('/otheradmin');
+    this.navCtl.navigateForward('/othersupdate');
   }
 
   openMenu(){

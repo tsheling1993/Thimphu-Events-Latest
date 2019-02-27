@@ -72,12 +72,12 @@ export class UploadpicService {
       upload.url=url;
       this.uploadFs.name=name;
       this.uploadFs.createdAt=new Date().toString();
-      this.saveFileData(url,basePath,title);
+      this.saveFileData(url,basePath,title,name);
     });
   })
   
 }
-saveFileData(url:any,basePath:any,title:any) {
+saveFileData(url:any,basePath:any,title:any,name:any) {
   this.uploadFs.url=url;
   console.log('save data url='+url)
   console.log(this.uploadFs.name,this.uploadFs.url,this.uploadFs.createdAt);
@@ -162,5 +162,5 @@ saveFileData3(url:any,basePath:any,title:any) {
   console.log('save data url='+url)
   console.log(this.uploadFs1.name3,this.uploadFs1.url3,this.uploadFs.createdAt);
   this.fs.collection(`${basePath}`).doc(`${title}`).update(this.uploadFs1);
-}
+  }
 }

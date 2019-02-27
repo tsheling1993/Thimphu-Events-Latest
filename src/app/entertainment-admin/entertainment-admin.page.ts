@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController,LoadingController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
@@ -25,11 +25,18 @@ export class EntertainmentAdminPage implements OnInit {
     private altCtl : AlertController,
     private navCtl : NavController,
     private datePicker: DatePicker,
-    private menu: MenuController
-  ){}
+    private menu: MenuController,
+    public loadingController: LoadingController
+  ){
+    this.loadData();
+  }
 
   ngOnInit() {
     //for retriving the entertainment data from the database
+  }
+
+  loadData(){
+    this.presentLoading();
     this.fs.collection('/t_entertainment',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
@@ -42,6 +49,10 @@ export class EntertainmentAdminPage implements OnInit {
             contact : doc.data().contract,
             detail : doc.data().detail,
           })
+          if(this.rData){
+            console.log("up");
+            this.loadingController.dismiss();      
+          }
         })
       })
       console.log(this.rData);
@@ -67,7 +78,11 @@ async alert(header:string,message:string)
 }
 //for deleting the movie item
 goDelete(tilte:any){
-  let basePath:string="/";
+  this.presentAlertConfirm(tilte)
+}
+
+deleteSure(tilte){
+  let basePath:string="/t_entertainment";
   this.fs.collection(`${basePath}`).doc(`${tilte}`).delete().then(data=>
     {
         this.alert("For Information","Deletion successful");
@@ -79,6 +94,39 @@ goDelete(tilte:any){
 goEdit(tilte : any){
   console.log(tilte);
   this.navCtl.navigateForward('/entertainmentupdate/'+tilte);
-}
-
   }
+
+  async presentAlertConfirm(tilte) {
+    const alert = await this.altCtl.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteSure(tilte)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
+  }
+}

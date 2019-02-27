@@ -66,7 +66,7 @@ export class MovieupdatePage implements OnInit {
           price : res.data().price,
           contact : res.data().contact,
           tailor : res.data().tailor,
-          url: res.data().url,
+         // url: res.data().url,
         })
         this.movieTitle = res.data().movietitle;
         this.movieVenue = res.data().venue;
@@ -89,8 +89,8 @@ export class MovieupdatePage implements OnInit {
 
   goUpdate(){
     let basePath:string="/movies";
-    let file = this.selectedFiles.item(0)
-    this.currentUpload = new Upload(file);
+    //let file = this.selectedFiles.item(0)
+   // this.currentUpload = new Upload(file);
     this.fs.collection(`${basePath}`).doc(`${this.movieTitle}`).update(
       {
       movietitle : this.movieTitle,
@@ -108,7 +108,7 @@ export class MovieupdatePage implements OnInit {
           this.alert("For Information","update successful");
           this.navCtl.navigateForward('/movies');
         console.log(data);
-        this.uploadServ.pushUpload1(this.currentUpload,basePath,this.movieTitle);
+        //this.uploadServ.pushUpload1(this.currentUpload,basePath,this.movieTitle);
       }
       )
       
@@ -128,7 +128,8 @@ export class MovieupdatePage implements OnInit {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
       date =>{
         let dateArray=date.toString().split(' ');
@@ -144,7 +145,8 @@ export class MovieupdatePage implements OnInit {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
       date => 
       {

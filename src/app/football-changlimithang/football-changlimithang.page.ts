@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ActivatedRoute,NavigationEnd,Router } from '@angular/router';
 
 @Component({
   selector: 'app-football-changlimithang',
@@ -32,7 +33,9 @@ export class FootballChanglimithangPage implements OnInit {
     private fs: AngularFirestore,
     private menu: MenuController,
     private navCtrl: NavController,
-    private callNumber: CallNumber
+    private callNumber: CallNumber,
+    public router: Router,
+    public alertController: AlertController
   ) { 
     this.loadFromFirestoreMonday();
     this.loadFromFirestoreTuesday();
@@ -44,6 +47,14 @@ export class FootballChanglimithangPage implements OnInit {
     this.loadPriceDetail();
 
     this.getDay();
+
+    // this.router.events.subscribe((e:any)=>
+    // {
+    //   if(e instanceof NavigationEnd)
+    //   {
+    //     this.loadData();
+    //   }
+    // })
   }
 
   day: string;
@@ -125,6 +136,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullMon(){
+    this.checkRegisterStatus();        
+
     this.changFootballTues_var = false;
     this.changFootballWed_var = false;
     this.changFootballThu_var = false;
@@ -141,6 +154,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullTues(){
+    this.checkRegisterStatus();        
+
     this.changFootballMon_var = false;
     this.changFootballWed_var = false;
     this.changFootballThu_var = false;
@@ -157,6 +172,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullWed(){
+    this.checkRegisterStatus();        
+
     console.log("wednesday")
     this.changFootballMon_var = false;
     this.changFootballTues_var = false;
@@ -175,6 +192,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullThu(){
+    this.checkRegisterStatus();        
+
     console.log("thursday")
     this.changFootballMon_var = false;
     this.changFootballTues_var = false;
@@ -193,6 +212,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullFri(){
+    this.checkRegisterStatus();        
+
     console.log("friday")
     this.changFootballMon_var = false;
     this.changFootballTues_var = false;
@@ -211,6 +232,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullSat(){
+    this.checkRegisterStatus();        
+
     console.log("saturday")
     this.changFootballMon_var = false;
     this.changFootballTues_var = false;
@@ -229,6 +252,8 @@ export class FootballChanglimithangPage implements OnInit {
   }
 
   showChangFullSun(){
+    this.checkRegisterStatus();        
+
     console.log("sunday")
     this.changFootballMon_var = false;
     this.changFootballTues_var = false;
@@ -388,6 +413,7 @@ export class FootballChanglimithangPage implements OnInit {
   price_weekend_night: number;
   price_weekdays_day : number;
   price_weekdays_night : number;
+  registeredStatus: boolean;
 
   loadPriceDetail(){
     this.fs.collection('/football').doc('Changlimithang_Full').get().subscribe(res=>  
@@ -399,7 +425,8 @@ export class FootballChanglimithangPage implements OnInit {
           price_weekend_day :res.data().price_weekend_day,
           price_weekend_night : res.data().price_weekend_night,
           price_weekdays_day : res.data().price_weekdays_day,
-          price_weekdays_night : res.data().price_weekdays_night
+          price_weekdays_night : res.data().price_weekdays_night,
+          registeredStatus: res.data().registeredStatus
         })
         this.contact_no = res.data().contact_no;
         this.price_nationalholiday_day = res.data().price_nationalholiday_day,
@@ -407,12 +434,32 @@ export class FootballChanglimithangPage implements OnInit {
         this.price_weekend_day = res.data().price_weekend_day,
         this.price_weekend_night = res.data().price_weekend_night,
         this.price_weekdays_day = res.data().price_weekdays_day,
-        this.price_weekdays_night = res.data().price_weekdays_night
+        this.price_weekdays_night = res.data().price_weekdays_night,
+        this.registeredStatus = res.data().registeredStatus;
       })
       console.log(this.changFootballPriceData);
   }
 
     callChang(){
       this.callNumber.callNumber(this.contact_no.toString(), true)
+    }
+
+    checkRegisterStatus(){
+      console.log("Here ");
+      if(this.registeredStatus == false){
+        console.log("Not registered!");
+        this.presentAlert();
+      }
+    }
+
+    async presentAlert() {
+      const alert = await this.alertController.create({
+        header: 'Sorry',
+        //subHeader: '',
+        message: 'This ground is not registered with the app. Currently its data is not online.',
+        buttons: ['OK']
+      });
+  
+      await alert.present();
     }
 }

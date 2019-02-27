@@ -30,7 +30,8 @@ export class ReligionaddmorePage implements OnInit {
   }
     //for uploading the the data
     insertFs(){
-      this.fs.collection('/t_religious').add(
+      // this.fs.collection('/t_religious').add(
+    this.fs.collection('/t_religious').doc(`${this.rTitle}`).set(
         {
         date : this.rDate,
         title : this.rTitle,
@@ -63,12 +64,14 @@ export class ReligionaddmorePage implements OnInit {
       this.datePicker.show({
         date: new Date(),
         mode: 'date',
-        androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+        // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+        androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
       }).then(
-        date => 
-        //console.log('Got date: ', date),
-        this.rDate = date,
-        err => console.log('Error occurred while getting date: ', err)
+        date =>{
+          let dateArray=date.toString().split(' ');
+          this.rDate=dateArray[0]+" "+dateArray[1]+" "+dateArray[2]+" "+dateArray[3]
+          err => console.log('Error occurred while getting date: ', err)
+        }
       );
     }
 

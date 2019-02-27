@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController,MenuController, NavController } from '@ionic/angular';
 import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { GoogleMaps, GoogleMap, Environment, Marker, GoogleMapOptions } from '@ionic-native/google-maps/ngx';
+import { GoogleMaps, GoogleMap, Environment, Marker, MarkerOptions, GoogleMapOptions } from '@ionic-native/google-maps/ngx';
+import { latLng, Bounds } from 'leaflet';
 
 @Component({
   selector: 'app-trackgarbagetruck',
@@ -11,8 +12,8 @@ import { GoogleMaps, GoogleMap, Environment, Marker, GoogleMapOptions } from '@i
 })
 export class TrackgarbagetruckPage implements OnInit {
 
-  map: GoogleMap;
-
+  public map: GoogleMap;
+  markerpostition:any[]=[];
   constructor(private route: ActivatedRoute,
     private alertCtrl:AlertController,
     private menu:MenuController,
@@ -26,8 +27,18 @@ export class TrackgarbagetruckPage implements OnInit {
     }, 2000);
     }
 
-  ngOnInit() {
-  }
+    intervalStatus: any;
+    ngOnInit() {
+      this.intervalStatus = setInterval(() => {
+        this.refreshMap();
+      }, 7000);
+    }
+
+    ionViewWillLeave(){
+      console.log("Leave view");
+      clearInterval(this.intervalStatus);
+    }
+
   openMenu(){
     this.menu.toggle('myMenu');
   }
@@ -51,25 +62,38 @@ export class TrackgarbagetruckPage implements OnInit {
   vehNo: any;
 
   garbageTruckData:any[]=[];
+
+  refreshMap(){
+    console.log("refresh map");
+    this.map.clear();
+    for(let data of this.markers)
+    {
+      this.garbageTruckData.pop(); 
+    }
+    this.loadGarbageTruck();
+      setTimeout(() => {     
+        this.loadMapRefresh();         
+    }, 1000);
+       //this.loadMapRefresh();         
+  }
  
   loadGarbageTruck(){
-    this.fs.collection('/t_garbage_trucks').doc('BG-1-A1000').get().subscribe(res=>  
+    this.fs.collection('/t_garbage_trucks').get().subscribe(res=>
+      {
+        res.forEach((doc:any)=>
       {
         this.garbageTruckData.push({
-          lat:res.data().latitude,
-          longitude:res.data().longitude,
-          routeTo : res.data().to,
-          routeFrom : res.data().from,
-          vehNo : res.data().vehicleno,
+          position:{lng:doc.data().longitude,lat:doc.data().latitude},
+          title: doc.data().from+' - '+doc.data().to+`<br>`+"Type: "+doc.data().type,
+          draggable: true,
+          vehNo : doc.data().vehicleno,
         })
-        this.lat = res.data().latitude;
-        this.longitude = res.data().longitude,
-        this.routeTo = res.data().to,
-        this.routeFrom = res.data().from,
-        this.vehNo = res.data().vehicleno
+      });
       })
-      console.log(this.garbageTruckData);
+      console.log("Values "+this.garbageTruckData);
   }
+
+  markers:Marker [];
 
   loadMap(){    
     Environment.setEnv({
@@ -79,31 +103,50 @@ export class TrackgarbagetruckPage implements OnInit {
     
     let mapOptions: GoogleMapOptions = {
       camera: {
-         target: {
-           lat: this.lat,
-           lng: this.longitude
-         },
          zoom: 15,
          tilt: 30
        }
     };
 
     this.map = GoogleMaps.create('map_canvas', mapOptions);
-    
-    let marker: Marker = this.map.addMarkerSync({
-      title: this.routeFrom+" - "+this.routeTo,
-      icon: 'blue',
-      //animation: 'DROP',
-      position: {
-        lat: this.lat,
-        lng: this.longitude
-      }
-    });
-    marker.showInfoWindow();
+
+      var bounds = [];
+      // let markers:Marker []= this.garbageTruckData.map((options)=>{
+      this.markers = this.garbageTruckData.map((options)=>{  
+      bounds.push(options.position);
+        return this.map.addMarkerSync(options);
+      });
+  
+      // Set a camera position that includes all markers.
+      this.map.moveCamera({
+        target: bounds
+      });
+
+       //this.markers[this.markers.length - 2].showInfoWindow();
   }
 
-  refreshMap(){
-    console.log("refresh map");
-   this.navCtl.navigateForward('/trackgarbagetruck');
+  loadMapRefresh(){    
+    Environment.setEnv({
+      'API_KEY_FOR_BROWSER_RELEASE':'AIzaSyCSBKG782bLxr6qGnsoRCmu4kbKF3iahCs',
+      'API_KEY_FOR_BROWSER_DEBUG':'AIzaSyCSBKG782bLxr6qGnsoRCmu4kbKF3iahCs'
+    });
+    
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+         zoom: 15,
+         tilt: 30
+       }
+    };
+
+      var bounds = [];
+      this.markers = this.garbageTruckData.map((options)=>{  
+      bounds.push(options.position);
+        return this.map.addMarkerSync(options);
+      });
+  
+      this.map.moveCamera({
+        target: bounds
+      });
+     
   }
 }

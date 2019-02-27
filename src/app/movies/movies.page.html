@@ -12,12 +12,16 @@
     <ion-list *ngFor='let data of movie'>
       <ion-item>
         <ion-grid>     
-        <ion-row>
+          <ion-row>
             <ion-col size="12" style="text-align: center">
-                <ion-text style="font-family: 'Times New Roman', Times, serif;font-size: 20px; color: dodgerblue">{{data.movietitle}}</ion-text>
-                <img src="{{data.url}}" style="border: 2px; border-style: solid;" height=150px; width=400px;>
+              <ion-text style="font-family: 'Times New Roman', Times, serif;font-size: 20px; color: dodgerblue">{{data.movietitle}}</ion-text>
             </ion-col>
-        </ion-row>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <img src="{{data.url}}" style="border: 2px; border-style: solid;" height=150px; width=400px;>
+            </ion-col>
+          </ion-row>
         <ion-row>
           <ion-col size="12" style="font-family: 'Times New Roman', Times, serif;">
               <ion-icon color="secondary" name="pin"></ion-icon>&nbsp;        
@@ -51,7 +55,7 @@
         <ion-row>
           <ion-col size="12" style="font-family: 'Times New Roman', Times, serif;">
             <ion-icon color="secondary" name="call"></ion-icon>&nbsp;
-            <span style="color:teal">Contact:&nbsp;</span>{{data.contact}}            
+            <span style="color:teal">Contact:&nbsp;</span><span (click)="callMovie(data.contact)">{{data.contact}}</span>            
           </ion-col>
         </ion-row>
         <ion-row>

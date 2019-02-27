@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 import { Upload } from '../../models/upload/upload';
@@ -25,10 +25,12 @@ export class ReligionAdminPage implements OnInit {
     private altCtl : AlertController,
     private navCtl : NavController,
     private datePicker: DatePicker,
-    private menu: MenuController
+    private menu: MenuController,
+    public loadingController: LoadingController
   ) 
   
   { 
+    this.presentLoading();
     this.fs.collection('/t_religious',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
     {
       res.forEach((doc:any)=>
@@ -40,12 +42,19 @@ export class ReligionAdminPage implements OnInit {
         venue:doc.data().venue,
         detail : doc.data().detail,
       })
+      if(this.rData){
+        console.log("up");
+        this.loadingController.dismiss();      
+      }
     });
     })
     console.log(this.rData);
   }
 
   ngOnInit() {
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
   }
   goAddMore(){
     this.navCtl.navigateForward('/religionaddmore');
@@ -63,11 +72,14 @@ export class ReligionAdminPage implements OnInit {
   }
   //for deleting the movie item
   goDelete(title:any){
-    let basePath:string="/";
+    this.presentAlertConfirm(title);
+  }
+  deleteSure(title){
+    let basePath:string="/t_religious";
     this.fs.collection(`${basePath}`).doc(`${title}`).delete().then(data=>
       {
           this.alert("For Information","Deletion successful");
-          this.navCtl.navigateForward('/religion');
+          this.navCtl.navigateForward('/religious');
       }
       )
   }
@@ -75,5 +87,38 @@ export class ReligionAdminPage implements OnInit {
   goEdit(title : any){
     console.log(title);
     this.navCtl.navigateForward('/religionupdate/'+title);
+  }
+  async presentAlertConfirm(title) {
+    const alert = await this.altCtl.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteSure(title)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
   }
 }

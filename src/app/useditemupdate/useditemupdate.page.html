@@ -48,7 +48,7 @@
         <ion-label>Details:</ion-label>
       </ion-col>
       <ion-col size="8">
-          <ion-input type="text" class="m-style" [(ngModel)]="itemDetail"></ion-input>
+          <ion-textarea type="text" class="m-style" [(ngModel)]="itemDetail"></ion-textarea>
         </ion-col>
     </ion-row>
     <ion-row>
@@ -59,7 +59,7 @@
           <ion-input type="text" class="m-style" [(ngModel)]="itemStatus"></ion-input>
         </ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col><ion-label>Image1:</ion-label></ion-col>
       <ion-col>
           <ion-label>
@@ -82,7 +82,7 @@
               <input type="file" (change)="detectSalesFiles3($event)">
            </ion-label>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col>
         <ion-button (click)="insertUsedItem()" color="secondary" > usedItem update</ion-button>

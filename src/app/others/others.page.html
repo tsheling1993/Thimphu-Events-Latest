@@ -10,24 +10,14 @@
   </ion-header>
   
   <ion-content padding>
-  <ion-list> 
-  </ion-list>
-  <div  class="title">
-    <ion-list *ngFor='let data of rData' class="title">
-          <ion-grid>
-          <ion-item>
-          <ion-row>
-            <ion-col size="12">
-                <div style="color:dodgerblue; text-align: right">{{data.date.toDate() | date:"mediumDate"}}</div>
-                <div><b>Title:&nbsp;</b>{{data.title}}</div>
-                <div><b>Time:&nbsp;</b>{{data.time}}</div>
-                <div><b>Venue:&nbsp;</b>{{data.venue}}</div>
-                <div><b>Detail:&nbsp;</b>{{data.detail}}</div>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-        </ion-grid>  
-    </ion-list>
-  </div>
-  </ion-content>
+    <ion-card *ngFor='let data of rData'>
+      <ion-card-content style="font-family: 'Times New Roman', Times, serif;">
+        <div style="color:dodgerblue; text-align: right"><ion-icon name="calendar"></ion-icon>{{data.date}}</div>
+        <div style="color:dodgerblue;font-family: 'Times New Roman', Times, serif;">{{data.title}}</div>
+        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon color="secondary" color="secondary" name="time"></ion-icon>&nbsp;<b>Time:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.time}}</span><br>
+        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon color="secondary" name="pin"></ion-icon>&nbsp;<b>Venue:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.venue}}</span><br>
+        <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon color="secondary" name="list"></ion-icon>&nbsp;<b>Details:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.detail}}</span><br>
+      </ion-card-content>
+    </ion-card>  
+</ion-content>
   

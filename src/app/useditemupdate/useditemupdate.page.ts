@@ -38,11 +38,19 @@ export class UseditemupdatePage implements OnInit {
     private navCtl : NavController,
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
-    private menu: MenuController) { }
+    private menu: MenuController) { 
+      this.loadData();
+    }
 
   ngOnInit() {
      //for retriving useditem data
-     this.fs.collection('/useditems',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
+  }
+
+  loadData(){
+    this.fs.collection('/useditems',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
       {
@@ -53,9 +61,9 @@ export class UseditemupdatePage implements OnInit {
           itemcontact : doc.data().itemcontact,
           detail : doc.data().detail,
           itemstatus : doc.data().itemstatus,
-          url1: doc.data().url1,
-          url2: doc.data().url2,
-          url3: doc.data().url3,
+          // url1: doc.data().url1,
+          // url2: doc.data().url2,
+          // url3: doc.data().url3,
         })
         this.itemTitle = doc.data().itemtitle;
         this.uploadDate = doc. data().uploaddate;
@@ -67,6 +75,7 @@ export class UseditemupdatePage implements OnInit {
       })
       console.log(this.items);
   }
+  
   detectSalesFiles1(event:any){
     this.selectedFiles1 = event.target.files;
   }
@@ -79,15 +88,15 @@ export class UseditemupdatePage implements OnInit {
 // for usedItem
 insertUsedItem(){
   let basePath:string="/useditems";
-  let file1 = this.selectedFiles1.item(0)
-  let file2 = this.selectedFiles2.item(0)
-  let file3 = this.selectedFiles3.item(0)
+  // let file1 = this.selectedFiles1.item(0)
+  // let file2 = this.selectedFiles2.item(0)
+  // let file3 = this.selectedFiles3.item(0)
 
-  this.currentUpload1 = new Upload(file1);
-  this.currentUpload2 = new Upload(file2);
-  this.currentUpload3 = new Upload(file3);
+  // this.currentUpload1 = new Upload(file1);
+  // this.currentUpload2 = new Upload(file2);
+  // this.currentUpload3 = new Upload(file3);
 
-  this.fs.collection(`${basePath}`).doc(`${this.itemTitle}`).set(
+  this.fs.collection(`${basePath}`).doc(`${this.itemTitle}`).update(
     {
     itemtitle : this.itemTitle,
     uploaddate : this.uploadDate, 
@@ -102,7 +111,7 @@ insertUsedItem(){
         this.alert("For Information","Insertion successful");
         this.navCtl.navigateForward('/sales');
       console.log(data);
-      this.uploadServ.pushUpload(this.currentUpload1,this.currentUpload2,this.currentUpload3,basePath,this.itemTitle);
+    //  this.uploadServ.pushUpload(this.currentUpload1,this.currentUpload2,this.currentUpload3,basePath,this.itemTitle);
 
     }
     )
@@ -123,7 +132,8 @@ pickDate(){
   this.datePicker.show({
     date: new Date(),
     mode: 'date',
-    androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
   }).then(
     date =>{
       let dateArray=date.toString().split(' ');

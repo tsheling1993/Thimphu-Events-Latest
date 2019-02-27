@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 
 @Component({
@@ -27,14 +27,18 @@ export class MusicordancePage implements OnInit {
   changebbsdzo: boolean = false;
   showentertainment : boolean =true;
   
+  timeoutStatus: any;
+  
   constructor(
     private fs : AngularFirestore,
     private altCtl : AlertController,
     private navCtl : NavController,
     private datePicker: DatePicker,
-    private menu:MenuController
+    private menu:MenuController,
+    public loadingController: LoadingController
   ) { 
     //for retriving the entertainment data from the database
+    this.presentLoading();
     this.fs.collection('/t_entertainment',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
@@ -47,40 +51,27 @@ export class MusicordancePage implements OnInit {
             contact : doc.data().contract,
             detail : doc.data().detail,
           })
+          this.rTitle = doc.data().tilte;
+          if(this.rData){
+            console.log("up");
+            this.loadingController.dismiss();      
+          }
         })
       })
       console.log(this.rData);
-       //for retriving the radio detdail
-       this.fs.collection('/t_radioPrograms').get().subscribe(res=>
-        {
-          res.forEach((doc:any)=>
-        {
-          this.eData.push({
-            date1 :doc.data().date1,
-            date2 :doc.data().date2,
-            date3 :doc.data().date3,
-          })
-        });
-        })
-        console.log(this.eData);
+      this.timeoutStatus = setTimeout(() => {
+        console.log("value="+this.rTitle);      
+        if(this.rTitle == undefined){
+          console.log("No Internet Connection");
+          this.loadingController.dismiss();      
+          this.navCtl.navigateForward('/internetstatus');
+        }      
+    }, 5000);
   }
-
-  // loadRadio(){
-  //     //for retriving the radio detdail
-  //     this.fs.collection('/t_radioPrograms').get().subscribe(res=>
-  //       {
-  //         res.forEach((doc:any)=>
-  //       {
-  //         this.rData.push({
-  //           date1 :doc.data().date1,
-  //           date2 :doc.data().date2,
-  //           date3 :doc.data().date3,
-  //         })
-  //       });
-  //       })
-  //       console.log(this.rData);
-  // }
-
+  ionViewWillLeave(){
+    console.log("Leave view");
+    clearTimeout(this.timeoutStatus);
+  }
   ngOnInit() {
   }
 
@@ -136,5 +127,15 @@ export class MusicordancePage implements OnInit {
     this.changeyeya = false;
     this.changebbseng = false;
     this.changebbsdzo = true;
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+     // message: 'Hellooo',
+      duration: 15000,
+      spinner: 'crescent',
+      cssClass: 'loaderClass'
+    });
+    return await loading.present();
   }
 }

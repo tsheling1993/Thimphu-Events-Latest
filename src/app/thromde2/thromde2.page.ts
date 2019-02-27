@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, NavController, MenuController } from '@ionic/angular';
+import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-thromde2',
@@ -41,10 +41,13 @@ export class Thromde2Page implements OnInit {
   timeCitybus: any;
 
   citybusScheduleData:any[]=[];
+  timeoutStatus: any;
 
   constructor(
     private fs: AngularFirestore,
     private navCtl : NavController,
+    private menu: MenuController,
+    public loadingController: LoadingController
   ) 
   { 
     this.loadCitybusSchedule();
@@ -52,6 +55,10 @@ export class Thromde2Page implements OnInit {
 
   ngOnInit() {
   }
+  openMenu(){
+    this.menu.toggle('myMenu');
+  }
+  
   customPopoverOptions: any = {
     // header: 'Hair Color',
     // subHeader: 'Select your hair color',
@@ -283,6 +290,19 @@ export class Thromde2Page implements OnInit {
         this.sun_chuba_chamgang = res.data().sun_chuba_chamgang
       })
       console.log(this.citybusScheduleData);
+      this.timeoutStatus = setTimeout(() => {
+        console.log("value="+this.mon_chang_babesaViaLungtenphu);      
+        if(this.mon_chang_babesaViaLungtenphu == undefined){
+          console.log("No Internet Connection");
+          this.loadingController.dismiss();      
+          this.navCtl.navigateForward('/internetstatus');
+        }      
+    }, 7500);
+    }
+
+    ionViewWillLeave(){
+      console.log("Leave view");
+      clearTimeout(this.timeoutStatus);
     }
 
   goGarbageTruck(){

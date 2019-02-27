@@ -29,9 +29,16 @@ export class OfferupdatePage implements OnInit {
     private navCtl : NavController,
     private datePicker: DatePicker,
     private uploadServ: UploadpicService,
-    private menu: MenuController) { }
+    private menu: MenuController) { 
+      this.loadData();
+    }
   ngOnInit() {
     //for retriving useditem data
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
+  }
+  loadData(){
     this.fs.collection('/sales',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
@@ -88,7 +95,8 @@ export class OfferupdatePage implements OnInit {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
       date =>{
         let dateArray=date.toString().split(' ');

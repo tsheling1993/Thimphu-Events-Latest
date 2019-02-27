@@ -23,6 +23,9 @@ export class FootballPage implements OnInit {
   desc:any;
   match:any[]=[];
   matchList: Array<any[]>;
+
+  timeoutStatus: any;
+ 
   constructor
   (
     private fs: AngularFirestore,
@@ -46,12 +49,25 @@ export class FootballPage implements OnInit {
           matchdate : doc.data().matchdate
           
         })
+        this.matchTitle = doc.data().matchtitle;
         // this.movieList.push(this.movie);
-        console.log("match data:"+this.match);
+       // console.log("match data:"+this.match);
       });
       })
+      this.timeoutStatus = setTimeout(() => {
+        console.log("value="+this.matchTitle);      
+        if(this.matchTitle == undefined){
+          console.log("No Internet Connection");
+          //this.loadingController.dismiss();      
+          this.navCtrl.navigateForward('/internetstatus');
+        }      
+    }, 7500);
       
    }
+   ionViewWillLeave(){
+    console.log("Leave view");
+    clearTimeout(this.timeoutStatus);
+  }
 
   ngOnInit() {
   }
@@ -67,5 +83,22 @@ export class FootballPage implements OnInit {
   showChangFutsal(){
     this.navCtrl.navigateForward('/futsal-changlimithang');
   }
+  
+  showYDF(){
+    this.navCtrl.navigateForward('/football-ydf');
+  }
 
+  showSerbithang(){
+    this.navCtrl.navigateForward('/football-serbithang');    
+  }
+  showChangjijiFull(){
+    this.navCtrl.navigateForward('/football-changjiji');    
+  }
+  showChangjijiFutsal(){
+    this.navCtrl.navigateForward('/futsal-changjiji');    
+  }
+  showBabesa(){
+    this.navCtrl.navigateForward('/football-babesa');    
+  }
 }
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
-// import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @Component({
   selector: 'app-thromdedriver',
   templateUrl: './thromdedriver.page.html',
@@ -15,10 +15,14 @@ export class ThromdedriverPage implements OnInit {
     private navCtl : NavController,
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
-    // public natStor: NativeStorage
+    public natStor: NativeStorage,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
+  }
+  openMenu(){
+    this.menu.toggle('myMenu');
   }
 
   login(){
@@ -32,7 +36,7 @@ export class ThromdedriverPage implements OnInit {
               vehileno:res.data().vehicleno,
               password:res.data().password
             });
-            // this.natStor.setItem('drivertok',{vehno:this.vehNo,password:this.password});
+            this.natStor.setItem('drivertok',{vehno:this.vehNo,password:this.password});
             this.navCtl.navigateForward('/tdriverdashboard/'+this.vehNo);
           }
           else

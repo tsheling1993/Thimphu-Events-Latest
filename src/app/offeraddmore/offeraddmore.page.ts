@@ -32,6 +32,9 @@ export class OfferaddmorePage implements OnInit {
     private menu: MenuController) { }
   ngOnInit() {
   }
+  openMenu(){
+    this.menu.toggle('myMenu');
+  }
 
   detectSalesFiles(event:any){
     this.selectedFiles = event.target.files;
@@ -72,7 +75,8 @@ export class OfferaddmorePage implements OnInit {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
       date =>{
         let dateArray=date.toString().split(' ');

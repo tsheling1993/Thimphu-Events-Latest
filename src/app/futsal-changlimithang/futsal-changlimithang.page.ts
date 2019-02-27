@@ -32,7 +32,8 @@ export class FutsalChanglimithangPage implements OnInit {
     private fs: AngularFirestore,
     private menu: MenuController,
     private navCtrl: NavController,
-    private callNumber: CallNumber
+    private callNumber: CallNumber,
+    public alertController: AlertController
   ) { 
     console.log("in constructor");
     this.loadFromFirestoreFutsalMonday();
@@ -126,6 +127,8 @@ export class FutsalChanglimithangPage implements OnInit {
   }
 
   showChangFutsalMon(){
+    this.checkRegisterStatus();        
+
     this.changFutsalTues_var = false;
     this.changFutsalWed_var = false;
     this.changFutsalThu_var = false;
@@ -142,6 +145,8 @@ export class FutsalChanglimithangPage implements OnInit {
   }
 
   showChangFutsalTues(){
+    this.checkRegisterStatus();        
+
     this.changFutsalMon_var = false;
     this.changFutsalWed_var = false;
     this.changFutsalThu_var = false;
@@ -158,6 +163,8 @@ export class FutsalChanglimithangPage implements OnInit {
   }
 
   showChangFutsalWed(){
+    this.checkRegisterStatus();        
+
     this.changFutsalMon_var = false;
     this.changFutsalTues_var = false;
     this.changFutsalThu_var = false;
@@ -174,6 +181,8 @@ export class FutsalChanglimithangPage implements OnInit {
   }
 
   showChangFutsalThu(){
+    this.checkRegisterStatus();        
+
     this.changFutsalMon_var = false;
     this.changFutsalTues_var = false;
     this.changFutsalWed_var = false;
@@ -190,6 +199,8 @@ export class FutsalChanglimithangPage implements OnInit {
   }
 
   showChangFutsalFri(){
+    this.checkRegisterStatus();        
+
     this.changFutsalMon_var = false;
     this.changFutsalTues_var = false;
     this.changFutsalWed_var = false;
@@ -205,6 +216,8 @@ export class FutsalChanglimithangPage implements OnInit {
     }
   }
   showChangFutsalSat(){
+    this.checkRegisterStatus();        
+
     this.changFutsalMon_var = false;
     this.changFutsalTues_var = false;
     this.changFutsalWed_var = false;
@@ -220,6 +233,8 @@ export class FutsalChanglimithangPage implements OnInit {
     }
   }
   showChangFutsalSun(){
+    this.checkRegisterStatus();        
+
     this.changFutsalMon_var = false;
     this.changFutsalTues_var = false;
     this.changFutsalWed_var = false;
@@ -425,6 +440,7 @@ export class FutsalChanglimithangPage implements OnInit {
   price_weekend_night: number;
   price_weekdays_day : number;
   price_weekdays_night : number;
+  registeredStatus: boolean;
 
   loadPriceDetail(){
     this.fs.collection('/football').doc('ChanglimithangFutsal').get().subscribe(res=>  
@@ -436,7 +452,8 @@ export class FutsalChanglimithangPage implements OnInit {
           price_weekend_day :res.data().price_weekend_day,
           price_weekend_night : res.data().price_weekend_night,
           price_weekdays_day : res.data().price_weekdays_day,
-          price_weekdays_night : res.data().price_weekdays_night
+          price_weekdays_night : res.data().price_weekdays_night,
+          registeredStatus: res.data().registeredStatus
         })
         this.contact_no = res.data().contact_no;
         this.price_nationalholiday_day = res.data().price_nationalholiday_day,
@@ -444,7 +461,8 @@ export class FutsalChanglimithangPage implements OnInit {
         this.price_weekend_day = res.data().price_weekend_day,
         this.price_weekend_night = res.data().price_weekend_night,
         this.price_weekdays_day = res.data().price_weekdays_day,
-        this.price_weekdays_night = res.data().price_weekdays_night
+        this.price_weekdays_night = res.data().price_weekdays_night,
+        this.registeredStatus = res.data().registeredStatus;
       })
       console.log(this.changFutsalPriceData);
   }
@@ -453,4 +471,22 @@ export class FutsalChanglimithangPage implements OnInit {
     this.callNumber.callNumber(this.contact_no.toString(), true)
   }
   
+  checkRegisterStatus(){
+    console.log("Here ");
+    if(this.registeredStatus == false){
+      console.log("Not registered!");
+      this.presentAlert();
+    }
+  }
+  
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Sorry',
+      //subHeader: '',
+      message: 'This ground is not registered with the app. Currently its data is not online.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }
