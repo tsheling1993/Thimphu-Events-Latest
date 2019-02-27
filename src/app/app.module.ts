@@ -21,6 +21,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
  
 const config={
   apiKey: "AIzaSyA4Lp4OYSekcXStv6OYK3_Usua82Pojr_8",
@@ -51,6 +52,7 @@ const config={
     NativeStorage,
     GoogleMaps,
     BackgroundMode,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

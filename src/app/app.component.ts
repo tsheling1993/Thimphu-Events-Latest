@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 
-import { Platform, MenuController, NavController, AlertController } from '@ionic/angular';
+import { Platform, MenuController, NavController, AlertController, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { Router } from '@angular/router';
+import { FcmService } from './fcm.service';
+import { tap } from 'rxjs/operators';
+import { async } from 'q';
+declare var FCMPlugin;
 
 @Component({
   selector: 'app-root',
@@ -15,7 +21,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     private menu:MenuController,
     private navCtrl: NavController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private fcm: FCM,
+    private router: Router,
+    public toastCtrl: ToastController
   ) {
     this.initializeApp();
   }
@@ -24,7 +33,38 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.fcm.subscribeToTopic('notifi');
+      this.fcm.getToken().then(token => {
+        console.log(token);
+      });
+      this.fcm.onTokenRefresh().subscribe(token => {
+        console.log(token);
+      });
     });
+    this.fcm.onNotification().subscribe(data => {
+      console.log(data);
+      if (data.wasTapped) {
+        console.log('Received in background');
+        this.router.navigate([data.landing_page]);
+      } else {
+        console.log('Received in foreground');
+        this.router.navigate([data.landing_page]);
+      }
+    });
+  }
+  Fcm()
+  {
+    
+  }
+  async makeToast(message) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 5000,
+      position: 'top',
+      showCloseButton: true,
+      closeButtonText: 'dismiss'
+    });
+    toast.present();
   }
   goAdminLogin(){
     this.navCtrl.navigateForward('/admin');
