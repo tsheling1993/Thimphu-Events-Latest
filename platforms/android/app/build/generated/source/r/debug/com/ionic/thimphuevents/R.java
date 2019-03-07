@@ -10,6 +10,11 @@ package com.ionic.thimphuevents;
 public final class R {
   public static final class attr {
     /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int ambientEnabled=0x7f010000;
+    /**
      * <p>May be a reference to another resource, in the form
      * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
      * attribute in the form
@@ -25,12 +30,40 @@ public final class R {
      * <tr><td>wide</td><td>1</td><td></td></tr>
      * </table>
      */
-    public static final int buttonSize=0x7f010000;
+    public static final int buttonSize=0x7f010001;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraBearing=0x7f010002;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraMaxZoomPreference=0x7f010003;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraMinZoomPreference=0x7f010004;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraTargetLat=0x7f010005;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraTargetLng=0x7f010006;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraTilt=0x7f010007;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int cameraZoom=0x7f010008;
     /**
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      */
-    public static final int circleCrop=0x7f010001;
+    public static final int circleCrop=0x7f010009;
     /**
      * <p>May be a reference to another resource, in the form
      * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
@@ -47,26 +80,26 @@ public final class R {
      * <tr><td>light</td><td>1</td><td></td></tr>
      * </table>
      */
-    public static final int colorScheme=0x7f010002;
+    public static final int colorScheme=0x7f01000a;
     /**
      * <p>May be a reference to another resource, in the form
      * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      */
-    public static final int font=0x7f010003;
+    public static final int font=0x7f01000b;
     /**
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
-    public static final int fontProviderAuthority=0x7f010004;
+    public static final int fontProviderAuthority=0x7f01000c;
     /**
      * <p>May be a reference to another resource, in the form
      * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      */
-    public static final int fontProviderCerts=0x7f010005;
+    public static final int fontProviderCerts=0x7f01000d;
     /**
      * <p>Must be one of the following constant values.</p>
      * <table>
@@ -78,7 +111,7 @@ public final class R {
      * <tr><td>blocking</td><td>0</td><td></td></tr>
      * </table>
      */
-    public static final int fontProviderFetchStrategy=0x7f010006;
+    public static final int fontProviderFetchStrategy=0x7f01000e;
     /**
      * <p>May be an integer value, such as "<code>100</code>".
      * <p>Must be one of the following constant values.</p>
@@ -90,17 +123,17 @@ public final class R {
      * <tr><td>forever</td><td>ffffffff</td><td></td></tr>
      * </table>
      */
-    public static final int fontProviderFetchTimeout=0x7f010007;
+    public static final int fontProviderFetchTimeout=0x7f01000f;
     /**
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
-    public static final int fontProviderPackage=0x7f010008;
+    public static final int fontProviderPackage=0x7f010010;
     /**
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
-    public static final int fontProviderQuery=0x7f010009;
+    public static final int fontProviderQuery=0x7f010011;
     /**
      * <p>Must be one of the following constant values.</p>
      * <table>
@@ -112,15 +145,15 @@ public final class R {
      * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      */
-    public static final int fontStyle=0x7f01000a;
+    public static final int fontStyle=0x7f010012;
     /**
      * <p>May be an integer value, such as "<code>100</code>".
      */
-    public static final int fontWeight=0x7f01000b;
+    public static final int fontWeight=0x7f010013;
     /**
      * <p>May be a floating point value, such as "<code>1.2</code>".
      */
-    public static final int imageAspectRatio=0x7f01000c;
+    public static final int imageAspectRatio=0x7f010014;
     /**
      * <p>Must be one of the following constant values.</p>
      * <table>
@@ -133,7 +166,43 @@ public final class R {
      * <tr><td>none</td><td>0</td><td></td></tr>
      * </table>
      */
-    public static final int imageAspectRatioAdjust=0x7f01000d;
+    public static final int imageAspectRatioAdjust=0x7f010015;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int latLngBoundsNorthEastLatitude=0x7f010016;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int latLngBoundsNorthEastLongitude=0x7f010017;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int latLngBoundsSouthWestLatitude=0x7f010018;
+    /**
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     */
+    public static final int latLngBoundsSouthWestLongitude=0x7f010019;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int liteMode=0x7f01001a;
+    /**
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>hybrid</td><td>4</td><td></td></tr>
+     * <tr><td>none</td><td>0</td><td></td></tr>
+     * <tr><td>normal</td><td>1</td><td></td></tr>
+     * <tr><td>satellite</td><td>2</td><td></td></tr>
+     * <tr><td>terrain</td><td>3</td><td></td></tr>
+     * </table>
+     */
+    public static final int mapType=0x7f01001b;
     /**
      * <p>May be a reference to another resource, in the form
      * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
@@ -142,7 +211,52 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
-    public static final int scopeUris=0x7f01000e;
+    public static final int scopeUris=0x7f01001c;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiCompass=0x7f01001d;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiMapToolbar=0x7f01001e;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiRotateGestures=0x7f01001f;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiScrollGestures=0x7f010020;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiTiltGestures=0x7f010021;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiZoomControls=0x7f010022;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int uiZoomGestures=0x7f010023;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int useViewLifecycle=0x7f010024;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int zOrderOnTop=0x7f010025;
   }
   public static final class bool {
     public static final int abc_action_bar_embed_tabs=0x7f020000;
@@ -212,24 +326,26 @@ public final class R {
     public static final int common_google_signin_btn_text_light_focused=0x7f050010;
     public static final int common_google_signin_btn_text_light_normal=0x7f050011;
     public static final int common_google_signin_btn_text_light_normal_background=0x7f050012;
-    public static final int googleg_disabled_color_18=0x7f050013;
-    public static final int googleg_standard_color_18=0x7f050014;
-    public static final int ic_action_next_item=0x7f050015;
-    public static final int ic_action_previous_item=0x7f050016;
-    public static final int ic_action_remove=0x7f050017;
-    public static final int notification_action_background=0x7f050018;
-    public static final int notification_bg=0x7f050019;
-    public static final int notification_bg_low=0x7f05001a;
-    public static final int notification_bg_low_normal=0x7f05001b;
-    public static final int notification_bg_low_pressed=0x7f05001c;
-    public static final int notification_bg_normal=0x7f05001d;
-    public static final int notification_bg_normal_pressed=0x7f05001e;
-    public static final int notification_icon_background=0x7f05001f;
-    public static final int notification_template_icon_bg=0x7f050020;
-    public static final int notification_template_icon_low_bg=0x7f050021;
-    public static final int notification_tile_bg=0x7f050022;
-    public static final int notify_panel_notification_icon_bg=0x7f050023;
-    public static final int screen=0x7f050024;
+    public static final int dummy_my_location_button=0x7f050013;
+    public static final int dummy_mylocation_button_shadow=0x7f050014;
+    public static final int googleg_disabled_color_18=0x7f050015;
+    public static final int googleg_standard_color_18=0x7f050016;
+    public static final int ic_action_next_item=0x7f050017;
+    public static final int ic_action_previous_item=0x7f050018;
+    public static final int ic_action_remove=0x7f050019;
+    public static final int notification_action_background=0x7f05001a;
+    public static final int notification_bg=0x7f05001b;
+    public static final int notification_bg_low=0x7f05001c;
+    public static final int notification_bg_low_normal=0x7f05001d;
+    public static final int notification_bg_low_pressed=0x7f05001e;
+    public static final int notification_bg_normal=0x7f05001f;
+    public static final int notification_bg_normal_pressed=0x7f050020;
+    public static final int notification_icon_background=0x7f050021;
+    public static final int notification_template_icon_bg=0x7f050022;
+    public static final int notification_template_icon_low_bg=0x7f050023;
+    public static final int notification_tile_bg=0x7f050024;
+    public static final int notify_panel_notification_icon_bg=0x7f050025;
+    public static final int screen=0x7f050026;
   }
   public static final class id {
     public static final int action0=0x7f060000;
@@ -245,32 +361,43 @@ public final class R {
     public static final int blocking=0x7f06000a;
     public static final int cancel_action=0x7f06000b;
     public static final int chronometer=0x7f06000c;
-    public static final int dark=0x7f06000d;
-    public static final int end_padder=0x7f06000e;
-    public static final int forever=0x7f06000f;
-    public static final int icon=0x7f060010;
-    public static final int icon_group=0x7f060011;
-    public static final int icon_only=0x7f060012;
-    public static final int info=0x7f060013;
-    public static final int italic=0x7f060014;
-    public static final int light=0x7f060015;
-    public static final int line1=0x7f060016;
-    public static final int line3=0x7f060017;
-    public static final int media_actions=0x7f060018;
-    public static final int none=0x7f060019;
-    public static final int normal=0x7f06001a;
-    public static final int notification_background=0x7f06001b;
-    public static final int notification_main_column=0x7f06001c;
-    public static final int notification_main_column_container=0x7f06001d;
-    public static final int right_icon=0x7f06001e;
-    public static final int right_side=0x7f06001f;
-    public static final int standard=0x7f060020;
-    public static final int status_bar_latest_event_content=0x7f060021;
-    public static final int text=0x7f060022;
-    public static final int text2=0x7f060023;
-    public static final int time=0x7f060024;
-    public static final int title=0x7f060025;
-    public static final int wide=0x7f060026;
+    public static final int closeBtn=0x7f06000d;
+    public static final int dark=0x7f06000e;
+    public static final int end_padder=0x7f06000f;
+    public static final int forever=0x7f060010;
+    public static final int fullscreen_content_controls=0x7f060011;
+    public static final int hybrid=0x7f060012;
+    public static final int icon=0x7f060013;
+    public static final int icon_group=0x7f060014;
+    public static final int icon_only=0x7f060015;
+    public static final int info=0x7f060016;
+    public static final int italic=0x7f060017;
+    public static final int light=0x7f060018;
+    public static final int line1=0x7f060019;
+    public static final int line3=0x7f06001a;
+    public static final int loadingBar=0x7f06001b;
+    public static final int media_actions=0x7f06001c;
+    public static final int none=0x7f06001d;
+    public static final int normal=0x7f06001e;
+    public static final int notification_background=0x7f06001f;
+    public static final int notification_main_column=0x7f060020;
+    public static final int notification_main_column_container=0x7f060021;
+    public static final int photoView=0x7f060022;
+    public static final int progressBar1=0x7f060023;
+    public static final int right_icon=0x7f060024;
+    public static final int right_side=0x7f060025;
+    public static final int satellite=0x7f060026;
+    public static final int shareBtn=0x7f060027;
+    public static final int standard=0x7f060028;
+    public static final int status_bar_latest_event_content=0x7f060029;
+    public static final int tag_transition_group=0x7f06002a;
+    public static final int terrain=0x7f06002b;
+    public static final int text=0x7f06002c;
+    public static final int text2=0x7f06002d;
+    public static final int time=0x7f06002e;
+    public static final int title=0x7f06002f;
+    public static final int titleTxt=0x7f060030;
+    public static final int wide=0x7f060031;
   }
   public static final class integer {
     public static final int cancel_button_image_alpha=0x7f070000;
@@ -278,21 +405,24 @@ public final class R {
     public static final int status_bar_notification_info_maxnum=0x7f070002;
   }
   public static final class layout {
-    public static final int notification_action=0x7f080000;
-    public static final int notification_action_tombstone=0x7f080001;
-    public static final int notification_media_action=0x7f080002;
-    public static final int notification_media_cancel_action=0x7f080003;
-    public static final int notification_template_big_media=0x7f080004;
-    public static final int notification_template_big_media_custom=0x7f080005;
-    public static final int notification_template_big_media_narrow=0x7f080006;
-    public static final int notification_template_big_media_narrow_custom=0x7f080007;
-    public static final int notification_template_custom_big=0x7f080008;
-    public static final int notification_template_icon_group=0x7f080009;
-    public static final int notification_template_lines_media=0x7f08000a;
-    public static final int notification_template_media=0x7f08000b;
-    public static final int notification_template_media_custom=0x7f08000c;
-    public static final int notification_template_part_chronometer=0x7f08000d;
-    public static final int notification_template_part_time=0x7f08000e;
+    public static final int activity_photo=0x7f080000;
+    public static final int dummy_infowindow=0x7f080001;
+    public static final int notification_action=0x7f080002;
+    public static final int notification_action_tombstone=0x7f080003;
+    public static final int notification_media_action=0x7f080004;
+    public static final int notification_media_cancel_action=0x7f080005;
+    public static final int notification_template_big_media=0x7f080006;
+    public static final int notification_template_big_media_custom=0x7f080007;
+    public static final int notification_template_big_media_narrow=0x7f080008;
+    public static final int notification_template_big_media_narrow_custom=0x7f080009;
+    public static final int notification_template_custom_big=0x7f08000a;
+    public static final int notification_template_icon_group=0x7f08000b;
+    public static final int notification_template_lines_media=0x7f08000c;
+    public static final int notification_template_media=0x7f08000d;
+    public static final int notification_template_media_custom=0x7f08000e;
+    public static final int notification_template_part_chronometer=0x7f08000f;
+    public static final int notification_template_part_time=0x7f080010;
+    public static final int photo=0x7f080011;
   }
   public static final class mipmap {
     public static final int icon=0x7f090000;
@@ -330,11 +460,28 @@ public final class R {
     public static final int google_crash_reporting_api_key=0x7f0a001d;
     public static final int google_storage_bucket=0x7f0a001e;
     public static final int launcher_name=0x7f0a001f;
-    public static final int project_id=0x7f0a0020;
-    public static final int status_bar_notification_info_overflow=0x7f0a0021;
-    public static final int tagmanager_preview_dialog_button=0x7f0a0022;
-    public static final int tagmanager_preview_dialog_message=0x7f0a0023;
-    public static final int tagmanager_preview_dialog_title=0x7f0a0024;
+    public static final int pgm_api_key_error=0x7f0a0020;
+    public static final int pgm_can_not_get_location=0x7f0a0021;
+    public static final int pgm_google_close_button=0x7f0a0022;
+    public static final int pgm_google_play_developer_error=0x7f0a0023;
+    public static final int pgm_google_play_error=0x7f0a0024;
+    public static final int pgm_google_play_internal_error=0x7f0a0025;
+    public static final int pgm_google_play_invalid_account=0x7f0a0026;
+    public static final int pgm_google_play_license_check_failed=0x7f0a0027;
+    public static final int pgm_google_play_network_error=0x7f0a0028;
+    public static final int pgm_google_play_service_disabled=0x7f0a0029;
+    public static final int pgm_google_play_service_invalid=0x7f0a002a;
+    public static final int pgm_google_play_service_missing=0x7f0a002b;
+    public static final int pgm_google_play_service_update_required=0x7f0a002c;
+    public static final int pgm_google_play_sign_in_required=0x7f0a002d;
+    public static final int pgm_location_rejected_by_user=0x7f0a002e;
+    public static final int pgm_no_location_providers=0x7f0a002f;
+    public static final int pgm_no_location_service_is_disabled=0x7f0a0030;
+    public static final int project_id=0x7f0a0031;
+    public static final int status_bar_notification_info_overflow=0x7f0a0032;
+    public static final int tagmanager_preview_dialog_button=0x7f0a0033;
+    public static final int tagmanager_preview_dialog_message=0x7f0a0034;
+    public static final int tagmanager_preview_dialog_title=0x7f0a0035;
   }
   public static final class style {
     public static final int TextAppearance_Compat_Notification=0x7f0b0000;
@@ -373,8 +520,8 @@ public final class R {
      * @see #FontFamily_fontProviderQuery
      */
     public static final int[] FontFamily={
-      0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 
-      0x7f010008, 0x7f010009
+      0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f, 
+      0x7f010010, 0x7f010011
     };
     /**
      * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#fontProviderAuthority}
@@ -459,17 +606,62 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
+     * <tr><td><code>{@link #FontFamilyFont_android_font android:font}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_android_fontWeight android:fontWeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_android_fontStyle android:fontStyle}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_font com.ionic.thimphuevents:font}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_fontStyle com.ionic.thimphuevents:fontStyle}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_fontWeight com.ionic.thimphuevents:fontWeight}</code></td><td></td></tr>
      * </table>
+     * @see #FontFamilyFont_android_font
+     * @see #FontFamilyFont_android_fontWeight
+     * @see #FontFamilyFont_android_fontStyle
      * @see #FontFamilyFont_font
      * @see #FontFamilyFont_fontStyle
      * @see #FontFamilyFont_fontWeight
      */
     public static final int[] FontFamilyFont={
-      0x7f010003, 0x7f01000a, 0x7f01000b
+      0x01010532, 0x01010533, 0x0101053f, 0x7f01000b, 
+      0x7f010012, 0x7f010013
     };
+    /**
+     * <p>This symbol is the offset where the {@link android.R.attr#font}
+     * attribute's value can be found in the {@link #FontFamilyFont} array.
+     *
+     * <p>May be a reference to another resource, in the form
+     * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
+     * attribute in the form
+     * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
+     *
+     * @attr name android:font
+     */
+    public static final int FontFamilyFont_android_font=0;
+    /**
+     * <p>This symbol is the offset where the {@link android.R.attr#fontWeight}
+     * attribute's value can be found in the {@link #FontFamilyFont} array.
+     *
+     * <p>May be an integer value, such as "<code>100</code>".
+     *
+     * @attr name android:fontWeight
+     */
+    public static final int FontFamilyFont_android_fontWeight=1;
+    /**
+     * <p>This symbol is the offset where the {@link android.R.attr#fontStyle}
+     * attribute's value can be found in the {@link #FontFamilyFont} array.
+     *
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>italic</td><td>1</td><td></td></tr>
+     * <tr><td>normal</td><td>0</td><td></td></tr>
+     * </table>
+     *
+     * @attr name android:fontStyle
+     */
+    public static final int FontFamilyFont_android_fontStyle=2;
     /**
      * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#font}
      * attribute's value can be found in the {@link #FontFamilyFont} array.
@@ -481,7 +673,7 @@ public final class R {
      *
      * @attr name com.ionic.thimphuevents:font
      */
-    public static final int FontFamilyFont_font=0;
+    public static final int FontFamilyFont_font=3;
     /**
      * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#fontStyle}
      * attribute's value can be found in the {@link #FontFamilyFont} array.
@@ -498,7 +690,7 @@ public final class R {
      *
      * @attr name com.ionic.thimphuevents:fontStyle
      */
-    public static final int FontFamilyFont_fontStyle=1;
+    public static final int FontFamilyFont_fontStyle=4;
     /**
      * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#fontWeight}
      * attribute's value can be found in the {@link #FontFamilyFont} array.
@@ -507,7 +699,7 @@ public final class R {
      *
      * @attr name com.ionic.thimphuevents:fontWeight
      */
-    public static final int FontFamilyFont_fontWeight=2;
+    public static final int FontFamilyFont_fontWeight=5;
     /**
      * Attributes that can be used with a LoadingImageView.
      * <p>Includes the following attributes:</p>
@@ -524,7 +716,7 @@ public final class R {
      * @see #LoadingImageView_imageAspectRatioAdjust
      */
     public static final int[] LoadingImageView={
-      0x7f010001, 0x7f01000c, 0x7f01000d
+      0x7f010009, 0x7f010014, 0x7f010015
     };
     /**
      * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#circleCrop}
@@ -564,6 +756,298 @@ public final class R {
      */
     public static final int LoadingImageView_imageAspectRatioAdjust=2;
     /**
+     * Attributes that can be used with a MapAttrs.
+     * <p>Includes the following attributes:</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Attribute</th><th>Description</th></tr>
+     * <tr><td><code>{@link #MapAttrs_ambientEnabled com.ionic.thimphuevents:ambientEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraBearing com.ionic.thimphuevents:cameraBearing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraMaxZoomPreference com.ionic.thimphuevents:cameraMaxZoomPreference}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraMinZoomPreference com.ionic.thimphuevents:cameraMinZoomPreference}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraTargetLat com.ionic.thimphuevents:cameraTargetLat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraTargetLng com.ionic.thimphuevents:cameraTargetLng}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraTilt com.ionic.thimphuevents:cameraTilt}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraZoom com.ionic.thimphuevents:cameraZoom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsNorthEastLatitude com.ionic.thimphuevents:latLngBoundsNorthEastLatitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsNorthEastLongitude com.ionic.thimphuevents:latLngBoundsNorthEastLongitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsSouthWestLatitude com.ionic.thimphuevents:latLngBoundsSouthWestLatitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsSouthWestLongitude com.ionic.thimphuevents:latLngBoundsSouthWestLongitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_liteMode com.ionic.thimphuevents:liteMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_mapType com.ionic.thimphuevents:mapType}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiCompass com.ionic.thimphuevents:uiCompass}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiMapToolbar com.ionic.thimphuevents:uiMapToolbar}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiRotateGestures com.ionic.thimphuevents:uiRotateGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiScrollGestures com.ionic.thimphuevents:uiScrollGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiTiltGestures com.ionic.thimphuevents:uiTiltGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiZoomControls com.ionic.thimphuevents:uiZoomControls}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiZoomGestures com.ionic.thimphuevents:uiZoomGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_useViewLifecycle com.ionic.thimphuevents:useViewLifecycle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_zOrderOnTop com.ionic.thimphuevents:zOrderOnTop}</code></td><td></td></tr>
+     * </table>
+     * @see #MapAttrs_ambientEnabled
+     * @see #MapAttrs_cameraBearing
+     * @see #MapAttrs_cameraMaxZoomPreference
+     * @see #MapAttrs_cameraMinZoomPreference
+     * @see #MapAttrs_cameraTargetLat
+     * @see #MapAttrs_cameraTargetLng
+     * @see #MapAttrs_cameraTilt
+     * @see #MapAttrs_cameraZoom
+     * @see #MapAttrs_latLngBoundsNorthEastLatitude
+     * @see #MapAttrs_latLngBoundsNorthEastLongitude
+     * @see #MapAttrs_latLngBoundsSouthWestLatitude
+     * @see #MapAttrs_latLngBoundsSouthWestLongitude
+     * @see #MapAttrs_liteMode
+     * @see #MapAttrs_mapType
+     * @see #MapAttrs_uiCompass
+     * @see #MapAttrs_uiMapToolbar
+     * @see #MapAttrs_uiRotateGestures
+     * @see #MapAttrs_uiScrollGestures
+     * @see #MapAttrs_uiTiltGestures
+     * @see #MapAttrs_uiZoomControls
+     * @see #MapAttrs_uiZoomGestures
+     * @see #MapAttrs_useViewLifecycle
+     * @see #MapAttrs_zOrderOnTop
+     */
+    public static final int[] MapAttrs={
+      0x7f010000, 0x7f010002, 0x7f010003, 0x7f010004, 
+      0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 
+      0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019, 
+      0x7f01001a, 0x7f01001b, 0x7f01001d, 0x7f01001e, 
+      0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 
+      0x7f010023, 0x7f010024, 0x7f010025
+    };
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#ambientEnabled}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:ambientEnabled
+     */
+    public static final int MapAttrs_ambientEnabled=0;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraBearing}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraBearing
+     */
+    public static final int MapAttrs_cameraBearing=1;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraMaxZoomPreference}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraMaxZoomPreference
+     */
+    public static final int MapAttrs_cameraMaxZoomPreference=2;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraMinZoomPreference}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraMinZoomPreference
+     */
+    public static final int MapAttrs_cameraMinZoomPreference=3;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraTargetLat}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraTargetLat
+     */
+    public static final int MapAttrs_cameraTargetLat=4;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraTargetLng}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraTargetLng
+     */
+    public static final int MapAttrs_cameraTargetLng=5;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraTilt}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraTilt
+     */
+    public static final int MapAttrs_cameraTilt=6;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#cameraZoom}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:cameraZoom
+     */
+    public static final int MapAttrs_cameraZoom=7;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#latLngBoundsNorthEastLatitude}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:latLngBoundsNorthEastLatitude
+     */
+    public static final int MapAttrs_latLngBoundsNorthEastLatitude=8;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#latLngBoundsNorthEastLongitude}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:latLngBoundsNorthEastLongitude
+     */
+    public static final int MapAttrs_latLngBoundsNorthEastLongitude=9;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#latLngBoundsSouthWestLatitude}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:latLngBoundsSouthWestLatitude
+     */
+    public static final int MapAttrs_latLngBoundsSouthWestLatitude=10;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#latLngBoundsSouthWestLongitude}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a floating point value, such as "<code>1.2</code>".
+     *
+     * @attr name com.ionic.thimphuevents:latLngBoundsSouthWestLongitude
+     */
+    public static final int MapAttrs_latLngBoundsSouthWestLongitude=11;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#liteMode}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:liteMode
+     */
+    public static final int MapAttrs_liteMode=12;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#mapType}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>hybrid</td><td>4</td><td></td></tr>
+     * <tr><td>none</td><td>0</td><td></td></tr>
+     * <tr><td>normal</td><td>1</td><td></td></tr>
+     * <tr><td>satellite</td><td>2</td><td></td></tr>
+     * <tr><td>terrain</td><td>3</td><td></td></tr>
+     * </table>
+     *
+     * @attr name com.ionic.thimphuevents:mapType
+     */
+    public static final int MapAttrs_mapType=13;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiCompass}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiCompass
+     */
+    public static final int MapAttrs_uiCompass=14;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiMapToolbar}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiMapToolbar
+     */
+    public static final int MapAttrs_uiMapToolbar=15;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiRotateGestures}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiRotateGestures
+     */
+    public static final int MapAttrs_uiRotateGestures=16;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiScrollGestures}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiScrollGestures
+     */
+    public static final int MapAttrs_uiScrollGestures=17;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiTiltGestures}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiTiltGestures
+     */
+    public static final int MapAttrs_uiTiltGestures=18;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiZoomControls}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiZoomControls
+     */
+    public static final int MapAttrs_uiZoomControls=19;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#uiZoomGestures}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:uiZoomGestures
+     */
+    public static final int MapAttrs_uiZoomGestures=20;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#useViewLifecycle}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:useViewLifecycle
+     */
+    public static final int MapAttrs_useViewLifecycle=21;
+    /**
+     * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#zOrderOnTop}
+     * attribute's value can be found in the {@link #MapAttrs} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.ionic.thimphuevents:zOrderOnTop
+     */
+    public static final int MapAttrs_zOrderOnTop=22;
+    /**
      * Attributes that can be used with a SignInButton.
      * <p>Includes the following attributes:</p>
      * <table>
@@ -579,7 +1063,7 @@ public final class R {
      * @see #SignInButton_scopeUris
      */
     public static final int[] SignInButton={
-      0x7f010000, 0x7f010002, 0x7f01000e
+      0x7f010001, 0x7f01000a, 0x7f01001c
     };
     /**
      * <p>This symbol is the offset where the {@link com.ionic.thimphuevents.R.attr#buttonSize}

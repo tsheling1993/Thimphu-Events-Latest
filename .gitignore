@@ -21,7 +21,7 @@ npm-debug.log*
 coverage/
 
 
-www/
+.www/
 tmp/
 temp/
 
