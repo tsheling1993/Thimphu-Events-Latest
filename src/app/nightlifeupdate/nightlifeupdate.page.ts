@@ -103,6 +103,4 @@ export class NightlifeupdatePage implements OnInit {
         }
       );
     }
-
-
 }

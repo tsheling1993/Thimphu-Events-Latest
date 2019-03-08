@@ -42,6 +42,7 @@ export class NightlifePage implements OnInit {
           venue:doc.data().venue,
           price:doc.data().price,
           detail : doc.data().detail,
+          url: doc.data().url
         })
         this.rTitle = doc.data().title;
         if(this.rData){

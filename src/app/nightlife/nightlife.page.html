@@ -9,13 +9,14 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
+    <!-- <ion-card>
       <ion-card-content>
         <img src="assets/img/nl.jpg" height=120px; width=500px;>
       </ion-card-content>
-    </ion-card>
+    </ion-card> -->
     <ion-card *ngFor='let data of rData'>
       <ion-card-content style="font-family: 'Times New Roman', Times, serif;">
+        <img src="{{data.url}}" height=150px; width=400px;>
         <div style="color:dodgerblue; text-align: right"><ion-icon name="calendar"></ion-icon>&nbsp;{{data.date}}</div>
         <div style="color:dodgerblue;font-family: 'Times New Roman', Times, serif;">{{data.title}}</div>
         <span style="color:teal;font-family: 'Times New Roman', Times, serif;"><ion-icon color="secondary" color="secondary" name="time"></ion-icon><b>&nbsp;Time:</b></span>&nbsp;<span style="color:black;font-family: 'Times New Roman', Times, serif;">{{data.time}}</span><br>
