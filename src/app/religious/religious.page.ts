@@ -39,6 +39,7 @@ export class ReligiousPage implements OnInit {
         time : doc.data().time,
         venue:doc.data().venue,
         detail : doc.data().detail,
+        url: doc.data().url
       })
       this.rTitle = doc.data().title;
       if(this.rData){

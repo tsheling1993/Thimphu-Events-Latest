@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { Upload } from '../../models/upload/upload';
+import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 
 @Component({
   selector: 'app-festivaladdmore',
@@ -16,35 +18,64 @@ export class FestivaladdmorePage implements OnInit {
   rVenue : any;
   rDetail : any;
   date : any;
+  selectedFiles: FileList;
+  currentUpload: Upload;
   constructor(
     private fs : AngularFirestore,
     private altCtl : AlertController,
     private navCtl : NavController,
     private datePicker: DatePicker,
-    private menu: MenuController
+    private menu: MenuController,
+    private uploadServ: UploadpicService,
   ) { }
 
   ngOnInit() {
   }
-
+  detectFiles(event:any){
+    this.selectedFiles = event.target.files;
+  }
   //for uploading the the data
+  // insertFs(){
+  //   // this.fs.collection('/t_festival').add(
+  //   this.fs.collection('/t_festival').doc(`${this.rTitle}`).set(
+  //     {
+  //     title : this.rTitle,
+  //     date : this.rDate,
+  //     time : this.rTime,
+  //     venue : this.rVenue,
+  //     detail : this.rDetail 
+  //   }
+  //   ).then(data=>
+  //     {
+  //       console.log("reach here with data: "+data);
+  //         this.alert("For Information","Data Insertion successful");
+  //         this.navCtl.navigateForward('/nationalfest');
+  //     }
+  //     )
+  // }
+
   insertFs(){
-    // this.fs.collection('/t_festival').add(
-    this.fs.collection('/t_festival').doc(`${this.rTitle}`).set(
+    let basePath:string="/t_festival";
+    let file = this.selectedFiles.item(0)
+    this.currentUpload = new Upload(file);
+    this.fs.collection(`${basePath}`).doc(`${this.rTitle}`).set(
       {
-      title : this.rTitle,
-      date : this.rDate,
-      time : this.rTime,
-      venue : this.rVenue,
-      detail : this.rDetail 
+        title : this.rTitle,
+        date : this.rDate,
+        time : this.rTime,
+        venue : this.rVenue,
+        detail : this.rDetail 
     }
     ).then(data=>
       {
         console.log("reach here with data: "+data);
-          this.alert("For Information","Data Insertion successful");
+          this.alert("For Information","Insertion successful");
           this.navCtl.navigateForward('/nationalfest');
+        console.log(data);
+        this.uploadServ.pushUpload1(this.currentUpload,basePath,this.rTitle);
       }
       )
+      
   }
 
   async alert(header:string,message:string)

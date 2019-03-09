@@ -50,6 +50,7 @@ export class MusicordancePage implements OnInit {
             date : doc.data().date,
             contact : doc.data().contract,
             detail : doc.data().detail,
+            url: doc.data().url
           })
           this.rTitle = doc.data().tilte;
           if(this.rData){

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { Upload } from '../../models/upload/upload';
+import { UploadpicService } from '../../services/uploadpic/uploadpic.service';
 
 @Component({
   selector: 'app-entertainmentaddmore',
@@ -17,21 +19,47 @@ export class EntertainmentaddmorePage implements OnInit {
   rContact : any;
   rDetail : any;
   date : any;
+  selectedFiles: FileList;
+  currentUpload: Upload;
   constructor(
     private fs : AngularFirestore,
     private altCtl : AlertController,
     private navCtl : NavController,
     private datePicker: DatePicker,
-    private menu: MenuController
+    private menu: MenuController,
+    private uploadServ: UploadpicService,
   ){}
 
   ngOnInit() {
   }
 
+  detectFiles(event:any){
+    this.selectedFiles = event.target.files;
+  }
   //this is the function for uploading data for Entertainment
+  // insertFs(){
+  //   // this.fs.collection('/t_entertainment').add(
+  //   this.fs.collection('/t_entertainment').doc(`${this.rTitle}`).set(
+  //     {
+  //       tilte : this.rTitle,
+  //       venue : this.rVenue,
+  //       time : this.rTime,
+  //       date : this.rDate,
+  //       contract : this.rContact,
+  //       detail : this.rDetail
+  //     }
+  //   ).then(data=>
+  //     {
+  //       console.log("reach here with entertainment data: "+data);
+  //       this.alert("For Information","Data Insertion Successful. press ok to exit...")
+  //       this.navCtl.navigateForward('/musicordance');
+  //     })
+  // }
   insertFs(){
-    // this.fs.collection('/t_entertainment').add(
-    this.fs.collection('/t_entertainment').doc(`${this.rTitle}`).set(
+    let basePath:string="/t_entertainment";
+    let file = this.selectedFiles.item(0)
+    this.currentUpload = new Upload(file);
+    this.fs.collection(`${basePath}`).doc(`${this.rTitle}`).set(
       {
         tilte : this.rTitle,
         venue : this.rVenue,
@@ -39,15 +67,18 @@ export class EntertainmentaddmorePage implements OnInit {
         date : this.rDate,
         contract : this.rContact,
         detail : this.rDetail
-      }
+    }
     ).then(data=>
       {
-        console.log("reach here with entertainment data: "+data);
-        this.alert("For Information","Data Insertion Successful. press ok to exit...")
-        this.navCtl.navigateForward('/musicordance');
-      })
+        console.log("reach here with data: "+data);
+          this.alert("For Information","Insertion successful");
+          this.navCtl.navigateForward('/musicordance');
+        console.log(data);
+        this.uploadServ.pushUpload1(this.currentUpload,basePath,this.rTitle);
+      }
+      )
+      
   }
-
   //for the alert
   async alert(header : string, message : string)
   {
@@ -59,18 +90,6 @@ export class EntertainmentaddmorePage implements OnInit {
     });
     alert.present();
   }
-
-  //for picking the date from datepicker
-  // pickDate(){
-  //   this.datePicker.show({
-  //     date : new Date(),
-  //     mode : 'date',
-  //     androidTheme : this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
-  //   }).then(date=>
-  //     this.rDate = date, 
-  //     err => console.log('error occur while getting the date', err)
-  //     );
-  //   }
 
   pickDate(){
     this.datePicker.show({
@@ -89,7 +108,6 @@ export class EntertainmentaddmorePage implements OnInit {
       
     );
   }
-
   openMenu(){
     this.menu.toggle('myMenu');
   }
