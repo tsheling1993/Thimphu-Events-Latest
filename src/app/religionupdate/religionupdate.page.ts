@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-religionupdate',
@@ -17,12 +18,14 @@ export class ReligionupdatePage implements OnInit {
   rDetail : any;
   date : any;
   rData:any[]=[];
+  title: string=this.route.snapshot.params['title'];
   constructor(
     private fs : AngularFirestore,
     private altCtl : AlertController,
     private navCtl : NavController,
     private datePicker: DatePicker,
-    private menu: MenuController
+    private menu: MenuController,
+    public route: ActivatedRoute
   ) {
     this.loadData();
   }
@@ -31,50 +34,96 @@ export class ReligionupdatePage implements OnInit {
   }
 
   loadData(){
-    this.fs.collection('/t_religious',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
-      {
-        res.forEach((doc:any)=>
-      {
-        this.rData.push({
-          date :doc.data().date,
-          title:doc.data().title,
-          time : doc.data().time,
-          venue:doc.data().venue,
-          detail : doc.data().detail,
-        })
-        this.rDate = doc.data().date;
-        this.rTitle = doc.data().title;
-        this.rTime = doc.data().time;
-        this.rVenue = doc.data().venue;
-        this.rDetail = doc.data().detail;
-      });
-      })
-      console.log(this.rData);
+    // this.fs.collection('/t_religious',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
+    //   {
+    //     res.forEach((doc:any)=>
+    //   {
+    //     this.rData.push({
+    //       date :doc.data().date,
+    //       title:doc.data().title,
+    //       time : doc.data().time,
+    //       venue:doc.data().venue,
+    //       detail : doc.data().detail,
+    //     })
+    //     this.rDate = doc.data().date;
+    //     this.rTitle = doc.data().title;
+    //     this.rTime = doc.data().time;
+    //     this.rVenue = doc.data().venue;
+    //     this.rDetail = doc.data().detail;
+    //   });
+    //   })
+    //   console.log(this.rData);
+
+    this.fs.collection('/t_religious').doc(`${this.title}`).get().subscribe(res=>
+      //this.fs.collection('/movies').doc('ddd').get().subscribe(res=>
+  
+        {
+        //   res.forEach((doc:any)=>
+       
+        // {
+          this.rData.push({
+            date :res.data().date,
+           title:res.data().title,
+           time : res.data().time,
+           venue:res.data().venue,
+           detail : res.data().detail,
+         })
+         this.rDate = res.data().date;
+         this.rTitle = res.data().title;
+         this.rTime = res.data().time;
+         this.rVenue = res.data().venue;
+         this.rDetail = res.data().detail;
+       });
   }
 
   openMenu(){
     this.menu.toggle('myMenu');
   }
     //for uploading the the data
+    // insertFs(){
+    //   // this.fs.collection('/t_religious').add(
+    // this.fs.collection('/t_religious').doc(`${this.rTitle}`).set(
+    //     {
+    //     date : this.rDate,
+    //     title : this.rTitle,
+    //     time : this.rTime,
+    //     venue : this.rVenue,
+    //     detail : this.rDetail 
+    //   }
+    //   ).then(data=>
+    //     {
+    //       console.log("reach here with data: "+data);
+    //         this.alert("For Information","Insertion successful");
+    //         this.navCtl.navigateForward('/religious');
+    //     }
+    //     )
+    // }
+  
     insertFs(){
-      // this.fs.collection('/t_religious').add(
-    this.fs.collection('/t_religious').doc(`${this.rTitle}`).set(
+      let basePath:string="/t_religious";
+      //let file = this.selectedFiles.item(0)
+     // this.currentUpload = new Upload(file);
+      this.fs.collection(`${basePath}`).doc(`${this.rTitle}`).update(
         {
-        date : this.rDate,
-        title : this.rTitle,
-        time : this.rTime,
-        venue : this.rVenue,
-        detail : this.rDetail 
+          date : this.rDate,
+          title : this.rTitle,
+          time : this.rTime,
+          venue : this.rVenue,
+          detail : this.rDetail 
       }
       ).then(data=>
         {
           console.log("reach here with data: "+data);
-            this.alert("For Information","Insertion successful");
+            this.alert("For Information","update successful");
             this.navCtl.navigateForward('/religious');
+          console.log(data);
+          //this.uploadServ.pushUpload1(this.currentUpload,basePath,this.movieTitle);
         }
         )
+        
     }
   
+
     async alert(header:string,message:string)
     {
       const alert=await this.altCtl.create({

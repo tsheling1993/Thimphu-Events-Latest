@@ -62,7 +62,7 @@ export class NightlifeaddmorePage implements OnInit {
       let basePath:string="/t_nightlife";
       let file = this.selectedFiles.item(0)
       this.currentUpload = new Upload(file);
-      this.fs.collection(`${basePath}`).doc(`${this.rDate}`).set(
+      this.fs.collection(`${basePath}`).doc(`${this.rTitle}`).set(
         {
           date : this.rDate,
           title : this.rTitle,
@@ -77,7 +77,7 @@ export class NightlifeaddmorePage implements OnInit {
             this.alert("For Information","Insertion successful");
             this.navCtl.navigateForward('/nightlife');
           console.log(data);
-          this.uploadServ.pushUpload1(this.currentUpload,basePath,this.rDate);
+          this.uploadServ.pushUpload1(this.currentUpload,basePath,this.rTitle);
         }
         )
         
