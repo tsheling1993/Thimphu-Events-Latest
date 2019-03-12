@@ -84,7 +84,7 @@ export class TrackgarbagetruckPage implements OnInit {
       {
         this.garbageTruckData.push({
           position:{lng:doc.data().longitude,lat:doc.data().latitude},
-          title: doc.data().from+' - '+doc.data().to+`<br>`+"Type: "+doc.data().type,
+          title: doc.data().from+' - '+doc.data().to+`\n`+"Type: "+doc.data().type,
           draggable: true,
           vehNo : doc.data().vehicleno,
         })
