@@ -14,15 +14,10 @@
     <!-- &nbsp;&nbsp;&nbsp;&nbsp;<ion-text center>View Ground Status for This Week.</ion-text> -->
     <ion-content overflow-scroll="false">  
     <ion-list>
-      <!-- <ion-item>
-        <ion-text>View Ground Status for This Week.</ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-label>Today: </ion-label>
-        <ion-datetime [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime><br>
-      </ion-item> -->
       <ion-item center button="true" (click)="showChangFutsalMon()"><span [(ngClass)]="monColor">Monday</span>
-        <ion-datetime *ngIf="monDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>    
+        <ion-datetime *ngIf="monDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+          <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+        </ion-datetime>    
       </ion-item>
         <div *ngIf="changFutsalMon_var">
           <ion-list *ngFor='let data of changFutsalMonData'>
@@ -114,7 +109,9 @@
         </div>
       
       <ion-item center button="true" (click)="showChangFutsalTues()"><span [(ngClass)]="tueColor">Tuesday</span>
-        <ion-datetime *ngIf="tueDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>    
+        <ion-datetime *ngIf="tueDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+          <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+        </ion-datetime>    
       </ion-item>
       <div *ngIf="changFutsalTues_var">
           <ion-list *ngFor='let data of changFutsalTuesData'>
@@ -206,7 +203,9 @@
         </div>  
   
       <ion-item center button="true" (click)="showChangFutsalWed()"><span [(ngClass)]="wedColor">Wednesday</span>
-        <ion-datetime *ngIf="wedDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>    
+        <ion-datetime *ngIf="wedDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+          <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+        </ion-datetime>    
       </ion-item>
       <div *ngIf="changFutsalWed_var">
           <ion-list *ngFor='let data of changFutsalWedData'>
@@ -298,7 +297,9 @@
         </div>  
   
       <ion-item center button="true" (click)="showChangFutsalThu()"><span [(ngClass)]="thuColor">Thursday</span>
-        <ion-datetime *ngIf="thuDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>    
+        <ion-datetime *ngIf="thuDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+         <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+        </ion-datetime>    
       </ion-item>
       <div *ngIf="changFutsalThu_var">
           <ion-list *ngFor='let data of changFutsalThuData'>
@@ -390,7 +391,9 @@
         </div> 
         
       <ion-item center button="true" (click)="showChangFutsalFri()"><span [(ngClass)]="friColor">Friday</span>
-        <ion-datetime *ngIf="friDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>    
+        <ion-datetime *ngIf="friDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+          <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+        </ion-datetime>    
       </ion-item>
       <div *ngIf="changFutsalFri_var">
           <ion-list *ngFor='let data of changFutsalFriData'>
@@ -482,7 +485,9 @@
         </div> 
   
         <ion-item center button="true" (click)="showChangFutsalSat()"><span [(ngClass)]="satColor">Saturday</span>
-          <ion-datetime *ngIf="satDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>      
+          <ion-datetime *ngIf="satDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+            <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+          </ion-datetime>      
         </ion-item>
         <div *ngIf="changFutsalSat_var">
             <ion-list *ngFor='let data of changFutsalSatData'>
@@ -574,7 +579,9 @@
           </div> 
   
           <ion-item center button="true" (click)="showChangFutsalSun()"><span [(ngClass)]="sunColor">Sunday</span>
-            <ion-datetime *ngIf="sunDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>        
+            <ion-datetime *ngIf="sunDate" [disabled]="true" displayFormat="MMM DD YYYY" [(ngModel)]="date">
+              <div style="color:teal">&nbsp;&nbsp;(Today)</div>      
+            </ion-datetime>        
           </ion-item>
           <div *ngIf="changFutsalSun_var">
             <ion-list *ngFor='let data of changFutsalSunData'>

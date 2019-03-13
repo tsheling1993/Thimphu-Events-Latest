@@ -27,26 +27,12 @@
     
         <!-- show when selected City Bus -->
         <div *ngIf="showCitybus_var">
-            <ion-row padding>
-              <ion-col size="5" no-padding>
-                  <ion-button expand="full" no-margin [color]="citybusScheduleColor" (click)="showCitybusSchedule()">
-                      Schedule_CB
-                      <ion-icon *ngIf="showCitybusSchedule_var" slot="start" name="arrow-dropdown"></ion-icon>
-                    </ion-button>
-              </ion-col>
-              <ion-col size="6" no-padding>
-                  <ion-button expand="full" no-margin [color]="citybusTrackerColor" (click)="showCitybusTracker()">
-                      Tracker_CB
-                      <ion-icon *ngIf="showCitybusTracker_var" slot="start" name="arrow-dropdown"></ion-icon>
-                    </ion-button>
-              </ion-col>
-            </ion-row>
-            
             <!-- for city bus schedule -->
             <div *ngIf="showCitybusSchedule_var">
+              <div style="text-align: center;color: teal">City Bus Schedule</div>
                 <ion-row padding>
-                    <ion-col size="3">
-                        <br><b>Day:</b> 
+                    <ion-col size="2">
+                        <br><b>Day</b> 
                     </ion-col>
                     <ion-col size="9">
                       <ion-select class="input_border" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Day" [(ngModel)]="daySelectedCity" (ionChange)="changedDaySelectedCity()">
@@ -56,10 +42,10 @@
                     </ion-col>
                   </ion-row>
                   <ion-row padding>
-                      <ion-col size="3">
-                          <br><b>From:</b> 
+                      <ion-col size="2">
+                          <br><b>From</b> 
                       </ion-col>
-                    <ion-col size="8">
+                    <ion-col size="9">
                       <ion-select class="input_border" [disabled]="terminalButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Terminal" [(ngModel)]="terminalCity" (ionChange)="changedTerminalSelectedCity()">
                         <ion-select-option value="changlamCity" >Changlam City Bus</ion-select-option>
                         <ion-select-option value="chubachuCity" >Chubachu Parking</ion-select-option>
@@ -67,10 +53,10 @@
                     </ion-col>
                   </ion-row>
                   <ion-row padding>
-                        <ion-col size="3">
-                            <br><b>To:</b> 
+                        <ion-col size="2">
+                            <br><b>To</b> 
                         </ion-col>
-                      <ion-col size="8">
+                      <ion-col size="9">
                         <ion-select *ngIf="monSatChanglam_var" class="input_border" [disabled]="destinationButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Destination" [(ngModel)]="destinationCity" (ionChange)="changedDestinationSelectedCity()">
                           <ion-select-option value="dechencholing" >Dechencholing</ion-select-option>
                           <ion-select-option value="babesaViaLungtenphu" >Babesa via Lungtenphu</ion-select-option>
@@ -115,18 +101,34 @@
                             <ion-button color="tertiary" (click)="findTiming()" [disabled]="submitButton">Find Timing</ion-button>
                         </ion-col>
                     </ion-row> 
+            
                     <ion-list *ngIf="showTimeStatus">
+                        <ion-card>
+                          <ion-card-content style="font-family: 'Times New Roman', Times, serif;">
                         <ion-item class="resultBox">
                             <ion-row>
                             <ion-col>
-                                <b>Time:</b> <br>{{timeCitybus}}                                                             
-                            </ion-col>
+                                <b>Before Lunch:</b> <br>{{morningCitySchedule}} <br>                                                            
+                                <b>After Lunch:</b> <br>{{lunchCitySchedule}}                                                             
+                              </ion-col>
                             </ion-row>
                         </ion-item>
+                      </ion-card-content>
+                    </ion-card>
                         <ion-item class="source">
                             source: citybus site
                         </ion-item>
                     </ion-list>
+                    <ion-row padding>
+                        <ion-col size="2">
+                        </ion-col>
+                        <ion-col size="7">        
+                          <ion-button color="tertiary">
+                            <ion-icon color="light" name="pin"></ion-icon>&nbsp;
+                            Track CityBus
+                          </ion-button>
+                        </ion-col>
+                    </ion-row> 
             </div>
     
             <!-- city bus tracker -->
@@ -147,48 +149,100 @@
     
       <!-- Show when selected garbage truck -->
       <div *ngIf="showGarbageTruck_var">
-          <ion-row padding>
-              <ion-col size="5" no-padding>
-                  <ion-button expand="full" no-margin [color]="garbageScheduleColor" (click)="showGarbageSchedule()">
-                      Schedule_GT
-                      <ion-icon *ngIf="showGarbageSchedule_var" slot="start" name="arrow-dropdown"></ion-icon>
-                    </ion-button>
-              </ion-col>
-              <ion-col size="6" no-padding>
-                  <ion-button expand="full" no-margin [color]="garbageTrackerColor" (click)="showGarbageTracker()">
-                      Tracker_GT
-                      <ion-icon *ngIf="showGarbageTracker_var" slot="start" name="arrow-dropdown"></ion-icon>
-                    </ion-button>
-              </ion-col>
-            </ion-row>
-      
             <!-- for garbage schedule -->
             <div *ngIf="showGarbageSchedule_var">
+                <div style="text-align: center;color: teal">Garbage Truck Schedule</div>
                 <ion-row padding>
+                  <ion-col size="3">
+                      <!-- <br><b>Zone:</b>  -->
+                  </ion-col>
                   <ion-col size="10">
-                    Sorry! Its currently not available.                       
+                    <ion-select class="input_border" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Zone" [(ngModel)]="zoneSelected" (ionChange)="changedZone()">
+                      <ion-select-option value="central">Central</ion-select-option>
+                      <ion-select-option value="south">South</ion-select-option>
+                      <ion-select-option value="north">North</ion-select-option>
+                    </ion-select>
                   </ion-col>
                 </ion-row>
-    
+                
                 <ion-row padding>
-                    <ion-col size="10">
-                        
-                    </ion-col>
-                  </ion-row>
+                  <!-- <ion-col size="1">
+                      <br><b>To:</b> 
+                  </ion-col> -->
+                <ion-col size="12">
+                <!-- When selected Central zone -->
+                <ion-select *ngIf="centralZone_var" class="input_border" [disabled]="locationButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Your Location" [(ngModel)]="garbageLocation" (ionChange)="changedLocation()">
+                  <ion-select-option value="upperMotithang" >Upper Motithang</ion-select-option>
+                  <ion-select-option value="lowerMotithang" >Lower Motithang</ion-select-option>
+                  <ion-select-option value="changangkha" >Changangkha</ion-select-option>
+                  <ion-select-option value="nppfColony" >NPPF Colony</ion-select-option>
+                  <ion-select-option value="nordzinAndHongkongMkt" >NordzinLam & Hongkong Mkt.</ion-select-option> 
+                  <ion-select-option value="nordzinAndPwd" >NordzinLam & PWD Colony/Gongdzin lam</ion-select-option>
+                  <ion-select-option value="changlamAndCFM" >Changlam & CFM resident</ion-select-option>
+                  <ion-select-option value="changlamAndChubachu" >Changlam & Chubachu Area</ion-select-option>
+              </ion-select>
+              
+              <!-- When selected South zone -->
+              <ion-select *ngIf="southZone_var" class="input_border" [disabled]="locationButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Your Location" [(ngModel)]="garbageLocation" (ionChange)="changedLocation()">
+                <ion-select-option value="changedaphu">Changedaphu</ion-select-option>
+                <ion-select-option value="changbangdu">Changbangdu</ion-select-option>
+                <ion-select-option value="policeHospital">Police camp/ Hospital area</ion-select-option>
+                <ion-select-option value="changzamtog">Changzamtog</ion-select-option>
+                <ion-select-option value="changjiji">Changjiji</ion-select-option> 
+                <ion-select-option value="olakha">Olakha</ion-select-option>
+                <ion-select-option value="lungtenphu">Lungtenphu</ion-select-option>
+                <ion-select-option value="semtokha">Semtokha</ion-select-option>
+                <ion-select-option value="babesaGref">Babesa Gref to Serbithang</ion-select-option>
+                <ion-select-option value="yhssBabesa">YHSS area/ Babesa Gref area</ion-select-option>
+                <ion-select-option value="babesaNew">Babesa New lab</ion-select-option>
+                <ion-select-option value="babesaOld">Babesa Old lab</ion-select-option>
+            </ion-select>
     
-                  <ion-row padding>
-                      <ion-col size="7">
-                      </ion-col>
-                      <ion-col size="5">
-                      </ion-col>
-                  </ion-row>
-            </div>
+            <!-- When selected North zone -->
+            <ion-select *ngIf="northZone_var" class="input_border" [disabled]="locationButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Your Location" [(ngModel)]="garbageLocation" (ionChange)="changedLocation()">
+              <ion-select-option value="taba">Taba</ion-select-option>
+              <ion-select-option value="lanjophakha">Langjophakha</ion-select-option>
+          </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row padding>
+          <ion-col size="3">
+          </ion-col>
+          <ion-col size="5">
+              <ion-button color="tertiary" (click)="findGarbageSchedule()" [disabled]="garbageButton">Find Schedule</ion-button>
+          </ion-col>
+      </ion-row> 
+      <ion-list *ngIf="showGarbageResult">
+          <ion-card>
+            <ion-card-content style="font-family: 'Times New Roman', Times, serif;">
+          <ion-item class="resultBox">
+            <ion-row>
+            <ion-col>
+                {{firstResultGarbage}}<br>
+                {{secondResultGarbage}}                                                          
+            </ion-col>
+            </ion-row>
+        </ion-item>
+        </ion-card-content>
+        </ion-card>
+        <ion-item class="source">
+            source: www.greenerwaybhutan.com
+        </ion-item>
+    </ion-list>
+         
+      </div>
     
             <!-- garbage tracker -->
-            <div *ngIf="showGarbageTracker_var">
+            <div *ngIf="true">
                 <ion-row padding>
-                    <ion-col size="10">
-                        <ion-button (click)="goGarbageTruck()" color="tertiary">Track Garbage Truck</ion-button>
+                  <!-- <ion-col size="2">
+
+                  </ion-col> -->
+                    <ion-col size="8">
+                        <ion-button (click)="goGarbageTruck()" color="tertiary">
+                            <ion-icon color="light" name="pin"></ion-icon>&nbsp;                          
+                          Track Garbage Truck
+                        </ion-button>
                     </ion-col>
                   </ion-row>
                   <ion-row padding>
