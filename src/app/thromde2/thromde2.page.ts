@@ -41,7 +41,8 @@ export class Thromde2Page implements OnInit {
     private fs: AngularFirestore,
     private navCtl : NavController,
     private menu: MenuController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private alertCtrl:AlertController,
   ) 
   { 
     this.loadCitybusSchedule();
@@ -360,82 +361,185 @@ export class Thromde2Page implements OnInit {
     this.showGarbageResult = true;
     if(this.garbageLocation == "upperMotithang"){
       this.garbageResult = this.upperMotithang;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "lowerMotithang"){
       this.garbageResult = this.lowerMotithang;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changangkha"){
       this.garbageResult = this.changangkha;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "nppfColony"){
       this.garbageResult = this.nppfColony;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "nordzinAndHongkongMkt"){
       this.garbageResult = this.nordzinLamAndHongMkt;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "nordzinAndPwd"){
       this.garbageResult = this.nordzinLamAndPWD;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changlamAndCFM"){
       this.garbageResult = this.changlamAndCFM;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changlamAndChubachu"){
       this.garbageResult = this.changlamAndChubachu;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changedaphu"){
       this.garbageResult = this.changedaphu;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changbangdu"){
       this.garbageResult = this.changbangdu;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "policeHospital"){
       this.garbageResult = this.policeCamp;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changzamtog"){
       this.garbageResult = this.changzamtog;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "changjiji"){
       this.garbageResult = this.changjiji;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "olakha"){
       this.garbageResult = this.olakha;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "lungtenphu"){
       this.garbageResult = this.lungtenphu;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "semtokha"){
       this.garbageResult = this.semtokha;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "babesaGref"){
       this.garbageResult = this.babesaGref;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "yhssBabesa"){
       this.garbageResult = this.YhssBabesa;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "babesaNew"){
       this.garbageResult = this.babesaNew;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
     else if(this.garbageLocation == "babesaOld"){
       this.garbageResult = this.babesaOld;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "dechencholing"){
+      this.garbageResult = this.dechencholing;
+      this.showPlaceDetailVar = true;
+      this.placeDetail = "Pangrizampa, RBG Family Line, RBG dasho line, Power colony, Dechencholing school surrounding."
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "walsipang"){
+      this.garbageResult = this.walsipang;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "drangrina"){
+      this.garbageResult = this.drangrina;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "jungshinaPamtsho"){
+      this.garbageResult = this.jungshinaPamtsho;
+      this.showPlaceDetailVar = true;
+      this.placeDetail = "Upper Jungshina, Jungshina Highway, Lower Jungshina and Pamtsho";
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "tabaArmy"){
+      this.garbageResult = this.tabaArmy;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "upperTaba"){
+      this.garbageResult = this.upperTaba;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "lowerTaba"){
+      this.garbageResult = this.lowerTaba;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "tabaHighway"){
+      this.garbageResult = this.tabaHighway;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "LowLangjophakha"){
+      this.garbageResult = this.LowLangjophakha;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "upperLangjophakha"){
+      this.garbageResult = this.upperLangjophakha;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "langjoPhakhaIH"){
+      this.garbageResult = this.langjoPhakhaIH;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "zilukha"){
+      this.garbageResult = this.zilukha;
+      this.showPlaceDetailVar = true;
+      this.placeDetail = "Zilukha Area (School), Duigiline and Zilukha Residential"
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "bebenaHejo"){
+      this.garbageResult = this.bebenaHejo;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "kawajangsa"){
+      this.garbageResult = this.kawajangsa;
+      this.showPlaceDetailVar = true;
+      this.placeDetail = "Kawajangsa Area, Telecom, RAPA, RMA, Hejo and Dzong Area";
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "satellite"){
+      this.garbageResult = this.satellite;
+      this.showPlaceDetailVar = false;
+      this.showSplittedGarbageResult(this.garbageResult);
+    }
+    else if(this.garbageLocation == "pamtsho"){
+      this.garbageResult = this.pamtsho;
+      this.showPlaceDetailVar = false;
       this.showSplittedGarbageResult(this.garbageResult);
     }
   }
@@ -466,6 +570,30 @@ export class Thromde2Page implements OnInit {
   YhssBabesa: any;
   babesaNew: any;
   babesaOld: any;
+  //south
+  dechencholing: any;
+  walsipang: any;
+  drangrina: any;
+  jungshinaPamtsho: any;
+  tabaArmy: any;
+  upperTaba: any;
+  lowerTaba: any;
+  tabaHighway: any;
+  LowLangjophakha: any;
+  upperLangjophakha: any;
+  langjoPhakhaIH: any;
+  zilukha: any;
+  bebenaHejo: any;
+  kawajangsa: any;
+  satellite: any;
+  pamtsho: any;
+
+  //place details variable
+  showPlaceDetailVar: boolean;
+  placeDetail: any;
+
+  //data in help button alert
+  helpButtonAlert: any;
 
   loadGarbageSchedule(){
     this.fs.collection('/thromde').doc('garbageTruckSchedule').get().subscribe(res=>  
@@ -490,7 +618,24 @@ export class Thromde2Page implements OnInit {
           babesaGref : res.data().babesaGref,
           YhssBabesa : res.data().YHS_Babesa,
           babesaNew : res.data().babesaNewlab,
-          babesaOld : res.data().babesaOldLab
+          babesaOld : res.data().babesaOldLab,
+          dechencholing : res.data().dechencholing,
+          walsipang: res.data().walsipang,
+          drangrina: res.data().drangrina,
+          jungshinaPamtsho: res.data().jungshinaPamtsho,
+          tabaArmy: res.data().tabaArmy,
+          upperTaba: res.data().upperTaba,
+          lowerTaba: res.data().lowerTaba,
+          tabaHighway: res.data().tabaHighway,
+          LowLangjophakha: res.data().LowLangjophakha,
+          upperLangjophakha: res.data().upperLangjophakha,
+          langjoPhakhaIH: res.data().langjoPhakhaIH,
+          zilukha: res.data().zilukha,
+          bebenaHejo: res.data().bebenaHejo,
+          kawajangsa: res.data().kawajangsa,
+          satellite: res.data().satellite,
+          pamtsho: res.data().pamtsho,
+          helpButtonAlert: res.data().helpButtonData
         })
         this.upperMotithang = res.data().upperMotithang;
         this.lowerMotithang = res.data().lowerMotithang,
@@ -511,8 +656,40 @@ export class Thromde2Page implements OnInit {
         this.babesaGref = res.data().babesaGref,
         this.YhssBabesa = res.data().YHS_Babesa,
         this.babesaNew = res.data().babesaNewlab,
-        this.babesaOld = res.data().babesaOldLab
+        this.babesaOld = res.data().babesaOldLab,
+        this.dechencholing = res.data().dechencholing,
+        this.walsipang = res.data().walsipang,
+        this.drangrina = res.data().drangrina,
+        this.jungshinaPamtsho = res.data().jungshinaPamtsho,
+        this.tabaArmy = res.data().tabaArmy,        
+        this.upperTaba = res.data().upperTaba,        
+        this.lowerTaba = res.data().lowerTaba,        
+        this.tabaHighway = res.data().tabaHighway,
+        this.LowLangjophakha = res.data().LowLangjophakha,
+        this.upperLangjophakha = res.data().upperLangjophakha,
+        this.langjoPhakhaIH = res.data().langjoPhakhaIH,
+        this.zilukha = res.data().zilukha,
+        this.bebenaHejo = res.data().bebenaHejo,
+        this.kawajangsa = res.data().kawajangsa,
+        this.satellite = res.data().satellite,
+        this.pamtsho = res.data().pamtsho,
+        this.helpButtonAlert = res.data().helpButtonData
       })
       console.log("Garbage Schedule"+this.garbageScheduleData);
     }
+
+    openHelp(){
+      this.alert();
+    }
+
+    async alert()
+  {
+    const alert=await this.alertCtrl.create({
+      cssClass:'alert',
+      header:'Help',
+      message: this.helpButtonAlert,
+      buttons:['OK']
+    });
+    alert.present();
+  }
 }

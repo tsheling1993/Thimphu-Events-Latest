@@ -119,7 +119,8 @@
                             source: citybus site
                         </ion-item>
                     </ion-list>
-                    <ion-row padding>
+                   <!-- Uncomment when bus tracking is incorporated. -->
+                    <!-- <ion-row padding>
                         <ion-col size="2">
                         </ion-col>
                         <ion-col size="7">        
@@ -128,14 +129,14 @@
                             Track CityBus
                           </ion-button>
                         </ion-col>
-                    </ion-row> 
+                    </ion-row>  -->
             </div>
     
             <!-- city bus tracker -->
             <div *ngIf="showCitybusTracker_var">
                 <ion-row padding>
                     <ion-col size="10">
-                          Sorry! Its currently not available.
+                          <!-- Sorry! Its currently not available. -->
                     </ion-col>
                   </ion-row>
                   <ion-row padding>
@@ -166,13 +167,10 @@
                 </ion-row>
                 
                 <ion-row padding>
-                  <!-- <ion-col size="1">
-                      <br><b>To:</b> 
-                  </ion-col> -->
                 <ion-col size="12">
                 <!-- When selected Central zone -->
                 <ion-select *ngIf="centralZone_var" class="input_border" [disabled]="locationButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Your Location" [(ngModel)]="garbageLocation" (ionChange)="changedLocation()">
-                  <ion-select-option value="upperMotithang" >Upper Motithang</ion-select-option>
+                  <ion-select-option value="upperMotithang">Upper Motithang</ion-select-option>
                   <ion-select-option value="lowerMotithang" >Lower Motithang</ion-select-option>
                   <ion-select-option value="changangkha" >Changangkha</ion-select-option>
                   <ion-select-option value="nppfColony" >NPPF Colony</ion-select-option>
@@ -200,8 +198,22 @@
     
             <!-- When selected North zone -->
             <ion-select *ngIf="northZone_var" class="input_border" [disabled]="locationButton" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select Your Location" [(ngModel)]="garbageLocation" (ionChange)="changedLocation()">
-              <ion-select-option value="taba">Taba</ion-select-option>
-              <ion-select-option value="lanjophakha">Langjophakha</ion-select-option>
+              <ion-select-option value="dechencholing">Dechencholing Area</ion-select-option>
+              <ion-select-option value="walsipang">Walsipang</ion-select-option>
+              <ion-select-option value="drangrina">Drangrina</ion-select-option>
+              <ion-select-option value="jungshinaPamtsho">Jungshina Pamtsho Area</ion-select-option>
+              <ion-select-option value="tabaArmy">Taba Army Colony & Lower School</ion-select-option>
+              <ion-select-option value="upperTaba">Upper Taba</ion-select-option>
+              <ion-select-option value="lowerTaba">Lower Taba</ion-select-option>
+              <ion-select-option value="tabaHighway">Taba Highway</ion-select-option>
+              <ion-select-option value="LowLangjophakha">Lower Langjophakha (Offices & Parks)</ion-select-option>
+              <ion-select-option value="upperLangjophakha">Upper LangjoPhakha</ion-select-option>
+              <ion-select-option value="langjoPhakhaIH">Lower LangjoPhakha (India House)</ion-select-option>
+              <ion-select-option value="zilukha">Zilukha Area</ion-select-option>
+              <ion-select-option value="bebenaHejo">Bebena & Hejo</ion-select-option>
+              <ion-select-option value="kawajangsa">Kawajangsa Area</ion-select-option>
+              <ion-select-option value="satellite">Satellite Town</ion-select-option>
+              <ion-select-option value="pamtsho">Pamtsho</ion-select-option>
           </ion-select>
           </ion-col>
         </ion-row>
@@ -215,18 +227,25 @@
       <ion-list *ngIf="showGarbageResult">
           <ion-card>
             <ion-card-content style="font-family: 'Times New Roman', Times, serif;">
-          <ion-item class="resultBox">
+          <!-- <ion-item class="resultBox"> -->
+            <!-- <ion-row *ngIf="showPlaceDetailVar">
+              <ion-col> -->
+                <div *ngIf="showPlaceDetailVar">
+                <b>Place Detail:</b> <br>{{placeDetail}}
+              </div>
+              <!-- </ion-col>
+            </ion-row> -->
             <ion-row>
             <ion-col>
                 {{firstResultGarbage}}<br>
                 {{secondResultGarbage}}                                                          
             </ion-col>
             </ion-row>
-        </ion-item>
+        <!-- </ion-item> -->
         </ion-card-content>
         </ion-card>
         <ion-item class="source">
-            source: www.greenerwaybhutan.com
+            source: www.greenerwaybhutan.com and from Clean City office.
         </ion-item>
     </ion-list>
          
@@ -243,6 +262,10 @@
                             <ion-icon color="light" name="pin"></ion-icon>&nbsp;                          
                           Track Garbage Truck
                         </ion-button>
+                    </ion-col>
+                    <ion-col size="2"></ion-col>
+                    <ion-col size="2">
+                      <ion-button color="tertiary" (click)="openHelp()"><span class="help"><b>?</b></span></ion-button>
                     </ion-col>
                   </ion-row>
                   <ion-row padding>

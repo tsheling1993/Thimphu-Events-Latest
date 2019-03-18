@@ -22,19 +22,30 @@
   <ion-grid>
     <div style="text-align: center;color:teal"><b>SET DETAILS</b></div>
     <ion-row>
-      <ion-col size="3"><br><b>From:</b></ion-col>
+      <ion-col size="3"><br><b>Location:</b></ion-col>
+      <!-- Dashboard for clean city drivers only -->
       <ion-col size="7">
           <ion-select class="input_border" interface="popover" placeholder="Select Location" [(ngModel)]="routeFrom">
-            <ion-select-option value="town">Town</ion-select-option>       
-            <ion-select-option value="changjiji">Changjiji</ion-select-option>       
-            <ion-select-option value="changzamtog">Changzamtog</ion-select-option>       
-            <ion-select-option value="babesa">Babesa</ion-select-option>       
-            <ion-select-option value="olakha">Olakha</ion-select-option>       
-            <ion-select-option value="motithang">Motithang</ion-select-option>      
+            <ion-select-option value="Dechencholing">Dechencholing Area</ion-select-option>
+            <ion-select-option value="Walsipang">Walsipang</ion-select-option>
+            <ion-select-option value="Drangrina">Drangrina</ion-select-option>
+            <ion-select-option value="Jungshina Pamtsho">Jungshina Pamtsho Area</ion-select-option>
+            <ion-select-option value="Taba Army Colony & Lower School">Taba Army Colony & Lower School</ion-select-option>
+            <ion-select-option value="Upper Taba">Upper Taba</ion-select-option>
+            <ion-select-option value="Lower Taba">Lower Taba</ion-select-option>
+            <ion-select-option value="Taba Highway">Taba Highway</ion-select-option>
+            <ion-select-option value="Lower Langjophakha (Offices & Parks)">Lower LangjoPhakha (Offices & Parks)</ion-select-option>
+            <ion-select-option value="Upper Langjophakha">Upper LangjoPhakha</ion-select-option>
+            <ion-select-option value="Lower LangjoPhakha (India House)">Lower Langjophakha (India House)</ion-select-option>
+            <ion-select-option value="Zilukha Area">Zilukha Area</ion-select-option>
+            <ion-select-option value="Bebena & Hejo">Bebena & Hejo</ion-select-option>
+            <ion-select-option value="Kawajangsa Area">Kawajangsa Area</ion-select-option>
+            <ion-select-option value="Satellite Town">Satellite Town</ion-select-option>
+            <ion-select-option value="Pamtsho">Pamtsho</ion-select-option>     
           </ion-select>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col size="3"><br><b>To:</b></ion-col>
       <ion-col size="7">
         <ion-select class="input_border" interface="popover" placeholder="Select Destination" [(ngModel)]="routeTo">
@@ -46,14 +57,13 @@
           <ion-select-option value="motithang">Motithang</ion-select-option>      
         </ion-select>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col size="3"><br><b>Type:</b></ion-col>
       <ion-col size="6">
         <ion-select class="input_border" interface="popover" placeholder="Select Type" [(ngModel)]="wasteType">
           <ion-select-option value="wet">Wet</ion-select-option>       
           <ion-select-option value="dry">Dry</ion-select-option>       
-          <ion-select-option value="both">Both</ion-select-option>             
         </ion-select>
       </ion-col>
     </ion-row>

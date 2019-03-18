@@ -119,7 +119,7 @@ export class TdriverdashboardPage implements OnInit {
 
   start()
   {
-    if(this.routeFrom==""||this.routeTo==""||this.wasteType=="")
+    if(this.routeFrom==""||this.wasteType=="")
     {
       this.alertGeneral("Empty Field(s)",'Fields "From","To", and "Waste Type" are mandatory.');
     }
@@ -134,7 +134,7 @@ export class TdriverdashboardPage implements OnInit {
       this.afs.collection('t_garbage_trucks').doc(`${this.vehicleno}`).update(
         {
           from:this.routeFrom,
-          to:this.routeTo,
+          // to:this.routeTo,
           type:this.wasteType,
           details:'No Details'
 
@@ -168,7 +168,7 @@ export class TdriverdashboardPage implements OnInit {
       this.afs.collection('t_garbage_trucks').doc(`${this.vehicleno}`).update(
         {
           from:this.routeFrom,
-          to:this.routeTo,
+          // to:this.routeTo,
           type:this.wasteType,
           details:this.details,
         }

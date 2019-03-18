@@ -31,7 +31,7 @@ export class TrackgarbagetruckPage implements OnInit {
     ngOnInit() {
       this.intervalStatus = setInterval(() => {
         this.refreshMap();
-      }, 7000);
+      }, 10000);
     }
 
     ionViewWillLeave(){
@@ -57,7 +57,7 @@ export class TrackgarbagetruckPage implements OnInit {
 
   lat: number;
   longitude: number;
-  routeTo: any;
+  // routeTo: any;
   routeFrom: any;
   vehNo: any;
 
@@ -84,7 +84,8 @@ export class TrackgarbagetruckPage implements OnInit {
       {
         this.garbageTruckData.push({
           position:{lng:doc.data().longitude,lat:doc.data().latitude},
-          title: doc.data().from+' - '+doc.data().to+`\n`+"Type: "+doc.data().type,
+          // title: doc.data().from+' - '+doc.data().to+`\n`+"Type: "+doc.data().type,
+          title: doc.data().from+`\n`+"Type: "+doc.data().type,          
           draggable: true,
           vehNo : doc.data().vehicleno,
         })
