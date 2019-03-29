@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, NavController, List, MenuController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -32,7 +31,7 @@ export class FootballPage implements OnInit {
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private iab: InAppBrowser,
-    private menu:MenuController
+    private menu:MenuController,
   ) 
   {
     this.fs.collection('/t_football_match',ref=>ref.orderBy('matchdate', 'desc')).get().subscribe(res=>
@@ -42,11 +41,15 @@ export class FootballPage implements OnInit {
         this.match.push({
           matchtitle : doc.data().matchtitle,
           matchteam1 : doc.data().matchteam1,
+          playerteam1: doc.data().playerteam1,
           matchteam2 : doc.data().matchteam2,
+          playerteam2: doc.data().playerteam2,
           matchsore : doc.data().matchsore,
           matchvenue : doc.data().matchvenue,
           matchtime : doc.data().matchtime,
-          matchdate : doc.data().matchdate
+          matchdate : doc.data().matchdate,
+          urllogo1: doc.data().urllogo1,
+          urllogo2: doc.data().urllogo2,
           
         })
         this.matchTitle = doc.data().matchtitle;
@@ -99,6 +102,14 @@ export class FootballPage implements OnInit {
   }
   showBabesa(){
     this.navCtrl.navigateForward('/football-babesa');    
+  }
+  viewPlayerTeam(team1 : any,players1:any,matchTitle:any){
+    console.log("players="+players1);
+    this.navCtrl.navigateForward('/teamplayerdetail/'+team1+'/'+players1+'/'+matchTitle);
+  }
+  viewPlayerTeam2(team2 : any,players2 : any, matchTitle:any){
+    console.log("players="+players2);
+    this.navCtrl.navigateForward('/teamplayerdetail/'+team2+'/'+players2+'/'+matchTitle);
   }
 }
 

@@ -31,7 +31,7 @@ export class NightlifePage implements OnInit {
   ) 
    { 
     this.presentLoading();
-    this.fs.collection('/t_nightlife',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
+    this.fs.collection('/t_nightlife',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
       {

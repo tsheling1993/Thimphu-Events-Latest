@@ -61,6 +61,8 @@ const routes: Routes = [
   { path: 'othersupdate', loadChildren: './othersupdate/othersupdate.module#OthersupdatePageModule' },
   { path: 'othersedit/:title', loadChildren: './othersedit/othersedit.module#OtherseditPageModule' },
   { path: 'internetstatus', loadChildren: './internetstatus/internetstatus.module#InternetstatusPageModule' },
+  { path: 'teamplayerdetail/:matchteam1/:playerteam1/:matchtitle', loadChildren: './teamplayerdetail/teamplayerdetail.module#TeamplayerdetailPageModule' },
+  { path: 'teamplayerdetail2/:matchteam2/:playerteam2/:matchtitle', loadChildren: './teamplayerdetail2/teamplayerdetail2.module#Teamplayerdetail2PageModule' },
 ];
 
 @NgModule({

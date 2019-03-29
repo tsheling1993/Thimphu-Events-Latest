@@ -28,7 +28,8 @@ export class NationalfestPage implements OnInit {
   ) { 
     //for getting the data of festival from the firebase
     this.presentLoading();
-    this.fs.collection('/t_festival').get().subscribe(res=>
+    //this.fs.collection('/t_festival').get().subscribe(res=>
+      this.fs.collection('/t_festival',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
       {

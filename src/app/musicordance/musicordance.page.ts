@@ -39,7 +39,8 @@ export class MusicordancePage implements OnInit {
   ) { 
     //for retriving the entertainment data from the database
     this.presentLoading();
-    this.fs.collection('/t_entertainment',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
+    //this.fs.collection('/t_entertainment',ref=>ref.orderBy('date', 'desc')).get().subscribe(res=>
+    this.fs.collection('/t_entertainment',ref=>ref.orderBy('createdAt', 'desc')).get().subscribe(res=>
       {
         res.forEach((doc:any)=>
         {
